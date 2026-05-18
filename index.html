@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="main-container">
-        <!-- 사이드바 -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2 class="sidebar-title">AX Navigator</h2>
-                <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <!-- 상단 네비게이션 바 -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h2 class="navbar-title">AX Navigator</h2>
             </div>
-            <nav class="sidebar-nav">
+            <button class="navbar-toggle" id="navbarToggle">☰</button>
+            <nav class="navbar-nav" id="navbarNav">
                 <ul class="nav-menu">
                     <li class="nav-item active">
                         <a href="#/" class="nav-link" data-route="/">
@@ -46,7 +46,6 @@
                             <span class="nav-text">ROI 리포트</span>
                         </a>
                     </li>
-                    <li class="nav-divider"></li>
                     <li class="nav-item">
                         <a href="manual.html" class="nav-link" target="_blank">
                             <span class="nav-icon">📖</span>
@@ -55,8 +54,10 @@
                     </li>
                 </ul>
             </nav>
-        </aside>
+        </div>
+    </header>
 
+    <div class="main-container">
         <!-- 메인 콘텐츠 -->
         <main class="main-content">
             <!-- 히어로 섹션 -->

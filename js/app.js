@@ -60,14 +60,21 @@ const AppState = {
 document.addEventListener('DOMContentLoaded', () => {
     AppState.load();
 
-    // 사이드바 토글 (모바일)
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar) {
-                sidebar.classList.toggle('collapsed');
-            }
+    // 네비게이션 바 토글 (모바일)
+    const navbarToggle = document.getElementById('navbarToggle');
+    const navbarNav = document.getElementById('navbarNav');
+
+    if (navbarToggle && navbarNav) {
+        navbarToggle.addEventListener('click', () => {
+            navbarNav.classList.toggle('open');
+        });
+
+        // 메뉴 항목 클릭 시 메뉴 닫기
+        const navLinks = navbarNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbarNav.classList.remove('open');
+            });
         });
     }
 });
