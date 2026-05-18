@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멘토 매칭 | AX Navigator</title>
+    <meta name="description" content="당신의 성장을 위한 최적의 멘토를 찾아 1:1 조언을 받으세요">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-light: #bfdbfe;
+            --color-primary-bg: #eff6ff;
+            --color-text-dark: #1f2937;
+            --color-text-main: #374151;
+            --color-border: #e5e7eb;
+            --color-bg: #f9fafb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #f0f4f8 0%, #ffffff 40%, #ffffff 100%);
+            color: var(--color-text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Mentor Selection View */
+        .quiz-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .quiz-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-question {
+            margin-bottom: 30px;
+        }
+
+        .quiz-question label {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .quiz-question label:hover {
+            background: var(--color-primary-bg);
+            border-color: var(--color-primary);
+        }
+
+        .quiz-question input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .quiz-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 12px 24px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Mentor Profile View */
+        .mentor-profile-section {
+            display: none;
+        }
+
+        .mentor-profile {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .mentor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 30px;
+        }
+
+        .mentor-avatar {
+            font-size: 5rem;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .mentor-avatar.ceo {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+        }
+
+        .mentor-avatar.ax {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+        }
+
+        .mentor-info h2 {
+            font-size: 2rem;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .mentor-title {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .mentor-experience {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .mentor-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mentor-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .mentor-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+        }
+
+        .expertise-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .expertise-item {
+            background: var(--color-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .expertise-item.ceo {
+            border-left-color: #22c55e;
+        }
+
+        .expertise-item.ax {
+            border-left-color: #f59e0b;
+        }
+
+        .expertise-item strong {
+            display: block;
+            color: var(--color-text-dark);
+            margin-bottom: 5px;
+        }
+
+        .expertise-item span {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .success-stories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .story-card {
+            background: var(--color-primary-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .story-card.ceo {
+            background: rgba(34, 197, 94, 0.05);
+            border-left-color: #22c55e;
+        }
+
+        .story-card.ax {
+            background: rgba(245, 158, 11, 0.05);
+            border-left-color: #f59e0b;
+        }
+
+        .story-card strong {
+            display: block;
+            color: var(--color-text-dark);
+            margin-bottom: 5px;
+        }
+
+        .story-card span {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .booking-section {
+            background: linear-gradient(135deg, var(--color-primary-bg) 0%, rgba(219, 234, 254, 0.8) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--color-primary-light);
+        }
+
+        .booking-section.ceo {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.02) 100%);
+            border-color: #bbf7d0;
+        }
+
+        .booking-section.ax {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%);
+            border-color: #fcd34d;
+        }
+
+        .booking-section h4 {
+            font-size: 1.3rem;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+        }
+
+        .booking-section p {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .booking-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .booking-button.ceo {
+            background: #22c55e;
+        }
+
+        .booking-button.ceo:hover {
+            background: #16a34a;
+        }
+
+        .booking-button.ax {
+            background: #f59e0b;
+        }
+
+        .booking-button.ax:hover {
+            background: #d97706;
+        }
+
+        .booking-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            gap: 8px;
+        }
+
+        .back-link span {
+            margin-left: 5px;
+        }
+
+        .all-mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .mentor-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .mentor-card.ceo {
+            border-top-color: #22c55e;
+        }
+
+        .mentor-card.ax {
+            border-top-color: #f59e0b;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .mentor-card-avatar {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .mentor-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .mentor-card-subtitle {
+            color: #6b7280;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .mentor-card-expertise {
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .mentor-card-expertise p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin: 5px 0;
+        }
+
+        .mentor-card-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .mentor-card-button.ceo {
+            background: #22c55e;
+        }
+
+        .mentor-card-button.ax {
+            background: #f59e0b;
+        }
+
+        .mentor-card-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .mentor-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .mentor-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 4rem;
+            }
+
+            .mentor-profile {
+                padding: 24px;
+            }
+
+            .quiz-section {
+                padding: 24px;
+            }
+
+            .all-mentors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 네비게이션 바 -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h2 class="navbar-title">AX Navigator</h2>
+            </div>
+            <button class="navbar-toggle" id="navbarToggle">☰</button>
+            <nav class="navbar-nav" id="navbarNav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="diagnosis.html" class="nav-link">
+                            <span class="nav-icon">🔍</span>
+                            <span class="nav-text">AX 진단</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="priority.html" class="nav-link">
+                            <span class="nav-icon">⚡</span>
+                            <span class="nav-text">우선순위</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="scenarios.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">부서별 시나리오</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="mentor-matching.html" class="nav-link">
+                            <span class="nav-icon">🎯</span>
+                            <span class="nav-text">멘토 매칭</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="report.html" class="nav-link">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">ROI 리포트</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="manual.html" class="nav-link" target="_blank">
+                            <span class="nav-icon">📖</span>
+                            <span class="nav-text">매뉴얼</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <header>
+            <h1>🎯 당신을 위한 멘토 매칭</h1>
+            <p class="subtitle">AI 성장을 위해 필요한 최적의 전문가를 찾아 1:1 조언을 받으세요</p>
+        </header>
+
+        <!-- Quiz Section (Initial View) -->
+        <div id="quiz-section" class="quiz-section">
+            <h3 class="quiz-title">당신의 상황에 맞는 멘토를 추천해 드릴게요</h3>
+
+            <div class="quiz-question">
+                <p style="font-weight: 600; margin-bottom: 15px; color: var(--color-text-dark);">1️⃣ 현재 가장 큰 도전 과제는?</p>
+                <label><input type="radio" name="challenge" value="ai-adoption"> 🤖 AI 도입을 어떻게 시작할지 모르겠어요</label>
+                <label><input type="radio" name="challenge" value="expansion"> 🚀 사업을 스케일하고 수익을 늘리고 싶어요</label>
+                <label><input type="radio" name="challenge" value="differentiation"> 🎯 우리만의 차별화 전략을 만들고 싶어요</label>
+            </div>
+
+            <div class="quiz-question">
+                <p style="font-weight: 600; margin-bottom: 15px; color: var(--color-text-dark);">2️⃣ 지금 필요한 것은?</p>
+                <label><input type="radio" name="need" value="technical"> 📚 기술 및 실행 방법론</label>
+                <label><input type="radio" name="need" value="strategy"> 🧭 비즈니스 전략 및 성장 경로</label>
+                <label><input type="radio" name="need" value="practical"> 💡 실제 사례와 베스트 프랙티스</label>
+            </div>
+
+            <button class="quiz-button" onclick="matchMentor()">추천받기 →</button>
+        </div>
+
+        <!-- All Mentors View -->
+        <div id="all-mentors-section" style="display: none;">
+            <a href="#" onclick="showQuiz(); return false;" class="back-link">← 다시 추천받기</a>
+
+            <h2 style="font-size: 1.8rem; margin-bottom: 30px; text-align: center; color: var(--color-text-dark);">전체 멘토 프로필</h2>
+
+            <div class="all-mentors-grid">
+                <!-- AI Leadership Expert -->
+                <div class="mentor-card">
+                    <div class="mentor-card-avatar">🤖</div>
+                    <h3 class="mentor-card-title">AI 리더십 전문가</h3>
+                    <p class="mentor-card-subtitle">기업 AI 전환 컨설턴트</p>
+                    <div class="mentor-card-expertise">
+                        <p><strong>프로필:</strong> ChatGPT/Claude 기반 AI 전환을 주도한 기업 컨설턴트</p>
+                        <p><strong>경력:</strong> 30+ 기업의 AI 도입 프로젝트 리드</p>
+                    </div>
+                    <button class="mentor-card-button" onclick="viewMentorProfile('ai-expert')">상세보기 →</button>
+                </div>
+
+                <!-- CEO/Scaling Expert -->
+                <div class="mentor-card ceo">
+                    <div class="mentor-card-avatar">🚀</div>
+                    <h3 class="mentor-card-title">스케일링 전문가</h3>
+                    <p class="mentor-card-subtitle">AI 스타트업 성장 경험 (Series A→B)</p>
+                    <div class="mentor-card-expertise">
+                        <p><strong>프로필:</strong> AI SaaS 기업 3곳의 스케일링 및 펀딩 경험</p>
+                        <p><strong>경력:</strong> $10M+ ARR까지 성장시킨 CEO</p>
+                    </div>
+                    <button class="mentor-card-button ceo" onclick="viewMentorProfile('ceo-expert')">상세보기 →</button>
+                </div>
+
+                <!-- AX Strategy Consultant -->
+                <div class="mentor-card ax">
+                    <div class="mentor-card-avatar">🎯</div>
+                    <h3 class="mentor-card-title">AX 전략 컨설턴트</h3>
+                    <p class="mentor-card-subtitle">AI 검색 최적화 및 도메인 전문가</p>
+                    <div class="mentor-card-expertise">
+                        <p><strong>프로필:</strong> AI 기반 콘텐츠 전략과 SEO 최적화 전문가</p>
+                        <p><strong>경력:</strong> 50+ 브랜드의 AX 전략 수립 및 실행</p>
+                    </div>
+                    <button class="mentor-card-button ax" onclick="viewMentorProfile('ax-expert')">상세보기 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentor Profiles (Individual Views) -->
+
+        <!-- AI Expert Profile -->
+        <div id="ai-expert-profile" class="mentor-profile-section">
+            <a href="#" onclick="showAllMentors(); return false;" class="back-link">← 전체 멘토로 돌아가기</a>
+
+            <div class="mentor-profile">
+                <div class="mentor-header">
+                    <div class="mentor-avatar">🤖</div>
+                    <div class="mentor-info">
+                        <h2>AI 리더십 전문가</h2>
+                        <p class="mentor-title">ChatGPT/Claude 기반 기업 AI 전환 컨설턴트</p>
+                        <p class="mentor-experience">
+                            30+ 기업의 AI 도입 프로젝트를 주도했으며, 프롬프트 엔지니어링부터 조직 문화 변혁까지
+                            전 단계의 AI 리더십을 경험했습니다. Fortune 500 기업부터 스타트업까지
+                            다양한 규모의 조직에서 AI 전환을 가속화했습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>🎯 전문 분야</h3>
+                    <div class="expertise-list">
+                        <div class="expertise-item">
+                            <strong>AI 도입 전략</strong>
+                            <span>조직 상황에 맞는 AI 선택 및 단계적 도입 로드맵</span>
+                        </div>
+                        <div class="expertise-item">
+                            <strong>LLM 선택 기준</strong>
+                            <span>GPT-4, Claude, Llama 등 모델 비교 및 선택 프레임워크</span>
+                        </div>
+                        <div class="expertise-item">
+                            <strong>프롬프트 엔지니어링</strong>
+                            <span>효과적인 프롬프트 작성법 및 성능 최적화 기법</span>
+                        </div>
+                        <div class="expertise-item">
+                            <strong>조직 변혁</strong>
+                            <span>AI 도입 시 발생하는 조직 저항 극복 및 문화 구축</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>💼 주요 성공 사례</h3>
+                    <div class="success-stories">
+                        <div class="story-card">
+                            <strong>E-Commerce Platform</strong>
+                            <span>AI 기반 추천 시스템 도입 → 전환율 34% 증가, 3개월 내 ROI 달성</span>
+                        </div>
+                        <div class="story-card">
+                            <strong>금융 서비스사</strong>
+                            <span>LLM 기반 고객 상담 자동화 → 운영 비용 40% 절감</span>
+                        </div>
+                        <div class="story-card">
+                            <strong>제조 기업</strong>
+                            <span>AI 품질 검수 시스템 구축 → 불량률 62% 감소</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>⏰ 멘토링 세션 정보</h3>
+                    <p style="color: #64748b; margin-bottom: 15px;">
+                        <strong>세션 형식:</strong> 60분 화상 미팅 (Zoom)<br>
+                        <strong>주요 내용:</strong> 당신의 AI 도입 현황 진단 → 3단계 로드맵 수립 → 첫 단계 실행 계획<br>
+                        <strong>사전 준비:</strong> 현재 사용 중인 AI 도구 목록 (있으면) 및 주요 과제 정리
+                    </p>
+                </div>
+
+                <div class="booking-section">
+                    <h4>🗓️ 일정 예약하기</h4>
+                    <p>당신의 AI 여정을 함께 시작해 보세요. 첫 60분 상담을 통해 명확한 방향을 찾을 수 있습니다.</p>
+                    <a href="https://calendly.com/ai-mentor/60min" target="_blank" class="booking-button">
+                        📅 Calendly 예약
+                    </a>
+                    <button class="booking-button" onclick="goBack()">
+                        ← 다른 멘토 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CEO Expert Profile -->
+        <div id="ceo-expert-profile" class="mentor-profile-section">
+            <a href="#" onclick="showAllMentors(); return false;" class="back-link">← 전체 멘토로 돌아가기</a>
+
+            <div class="mentor-profile">
+                <div class="mentor-header">
+                    <div class="mentor-avatar ceo">🚀</div>
+                    <div class="mentor-info">
+                        <h2>스케일링 전문가 (CEO)</h2>
+                        <p class="mentor-title">AI SaaS 스타트업 확장 경험 (Series A → Series B)</p>
+                        <p class="mentor-experience">
+                            3개 AI SaaS 기업의 $0→$50M ARR 성장을 이끌었으며,
+                            VC 펀딩 $100M+를 유치한 경험이 있습니다.
+                            고객 확보, Unit Economics 최적화, 팀 빌딩까지
+                            수익성 있는 확장의 전체 프로세스를 체계화했습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>🎯 전문 분야</h3>
+                    <div class="expertise-list">
+                        <div class="expertise-item ceo">
+                            <strong>수익성 확장</strong>
+                            <span>고객 획득 비용(CAC)과 생애 가치(LTV) 최적화 전략</span>
+                        </div>
+                        <div class="expertise-item ceo">
+                            <strong>Unit Economics</strong>
+                            <span>SaaS 메트릭 분석 및 성장 예측 모델링</span>
+                        </div>
+                        <div class="expertise-item ceo">
+                            <strong>VC 피칭</strong>
+                            <span>투자 유치를 위한 피치덱, 데이터 스토리텔링, 투자자 네트워크</span>
+                        </div>
+                        <div class="expertise-item ceo">
+                            <strong>팀 빌딩 & 조직화</strong>
+                            <span>스타트업 초기 팀 구성부터 수백 명 조직 구축까지</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>💼 주요 성공 사례</h3>
+                    <div class="success-stories">
+                        <div class="story-card ceo">
+                            <strong>AI Analytics Platform</strong>
+                            <span>Series A 펀딩 $5M → 18개월 후 Series B $25M, 연 3배 성장</span>
+                        </div>
+                        <div class="story-card ceo">
+                            <strong>Customer Success AI</strong>
+                            <span>$0→$10M ARR (36개월), CAC 36% 감소, NRR 130% 달성</span>
+                        </div>
+                        <div class="story-card ceo">
+                            <strong>Content AI 스타트업</strong>
+                            <span>초기 고객 20→ 1,200+ 기업 고객 확보, 월 50% 성장</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>⏰ 멘토링 세션 정보</h3>
+                    <p style="color: #64748b; margin-bottom: 15px;">
+                        <strong>세션 형식:</strong> 90분 화상 미팅 (Zoom)<br>
+                        <strong>주요 내용:</strong> 현재 비즈니스 모델 진단 → 성장 병목 파악 → 12개월 성장 로드맵<br>
+                        <strong>사전 준비:</strong> 월 MRR, 고객 수, 이탈율 등 주요 SaaS 메트릭
+                    </p>
+                </div>
+
+                <div class="booking-section ceo">
+                    <h4>🗓️ 일정 예약하기</h4>
+                    <p>당신의 비즈니스를 스케일할 수 있는 구체적인 성장 전략을 함께 만들어 봅시다.</p>
+                    <a href="https://calendly.com/ceo-mentor/90min" target="_blank" class="booking-button ceo">
+                        📅 Calendly 예약
+                    </a>
+                    <button class="booking-button ceo" onclick="goBack()">
+                        ← 다른 멘토 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AX Expert Profile -->
+        <div id="ax-expert-profile" class="mentor-profile-section">
+            <a href="#" onclick="showAllMentors(); return false;" class="back-link">← 전체 멘토로 돌아가기</a>
+
+            <div class="mentor-profile">
+                <div class="mentor-header">
+                    <div class="mentor-avatar ax">🎯</div>
+                    <div class="mentor-info">
+                        <h2>AX 전략 컨설턴트</h2>
+                        <p class="mentor-title">AI 검색 최적화 및 도메인 전문성 컨설턴트</p>
+                        <p class="mentor-experience">
+                            50+ 브랜드의 AX(Answer Experience) 전략 수립 및 실행을 주도했습니다.
+                            AI 검색 결과에서 상위 노출되는 콘텐츠 전략부터 경쟁사 분석까지
+                            차별화된 시장 포지셔닝을 만드는 데 특화되어 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>🎯 전문 분야</h3>
+                    <div class="expertise-list">
+                        <div class="expertise-item ax">
+                            <strong>콘텐츠 전략</strong>
+                            <span>AI 검색에 최적화된 답변형 콘텐츠 구조 및 작성 프레임워크</span>
+                        </div>
+                        <div class="expertise-item ax">
+                            <strong>검색 최적화</strong>
+                            <span>Google SGE, Bing AI, Perplexity 등 AI 검색에서의 노출 최적화</span>
+                        </div>
+                        <div class="expertise-item ax">
+                            <strong>경쟁사 분석</strong>
+                            <span>시장에서 차별화되는 포지셔닝 및 틈새 시장 발굴</span>
+                        </div>
+                        <div class="expertise-item ax">
+                            <strong>도메인 권위</strong>
+                            <span>전문성, 신뢰성, 저자성(E-E-A-T) 구축 전략</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>💼 주요 성공 사례</h3>
+                    <div class="success-stories">
+                        <div class="story-card ax">
+                            <strong>건강관련 SaaS</strong>
+                            <span>AI 검색 최상위 노출 달성 → 월 유입 50% 증가</span>
+                        </div>
+                        <div class="story-card ax">
+                            <strong>금융 정보 사이트</strong>
+                            <span>경쟁사 분석 기반 틈새 전략 수립 → 도메인 권위 UP</span>
+                        </div>
+                        <div class="story-card ax">
+                            <strong>기술 블로그</strong>
+                            <span>콘텐츠 리포지셔닝 → Perplexity 인용 1,000+ 건</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-section">
+                    <h3>⏰ 멘토링 세션 정보</h3>
+                    <p style="color: #64748b; margin-bottom: 15px;">
+                        <strong>세션 형식:</strong> 60분 화상 미팅 (Zoom)<br>
+                        <strong>주요 내용:</strong> 현재 콘텐츠 & 검색 현황 진단 → AI 검색 최적화 로드맵 → 콘텐츠 우선순위 결정<br>
+                        <strong>사전 준비:</strong> 주요 타겟 키워드 및 현재 콘텐츠 목록 (있으면)
+                    </p>
+                </div>
+
+                <div class="booking-section ax">
+                    <h4>🗓️ 일정 예약하기</h4>
+                    <p>당신의 브랜드를 AI 검색에서 돋보이게 할 구체적인 전략을 함께 수립해 봅시다.</p>
+                    <a href="https://calendly.com/ax-mentor/60min" target="_blank" class="booking-button ax">
+                        📅 Calendly 예약
+                    </a>
+                    <button class="booking-button ax" onclick="goBack()">
+                        ← 다른 멘토 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 AX Growth Navigator. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <a href="manual.html" target="_blank" class="footer-link">📖 사용 매뉴얼</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get URL parameter for direct mentor access
+        function getMentorParam() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('mentor');
+        }
+
+        // Show quiz section
+        function showQuiz() {
+            document.getElementById('quiz-section').style.display = 'block';
+            document.getElementById('all-mentors-section').style.display = 'none';
+            document.getElementById('ai-expert-profile').style.display = 'none';
+            document.getElementById('ceo-expert-profile').style.display = 'none';
+            document.getElementById('ax-expert-profile').style.display = 'none';
+        }
+
+        // Show all mentors
+        function showAllMentors() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('all-mentors-section').style.display = 'block';
+            document.getElementById('ai-expert-profile').style.display = 'none';
+            document.getElementById('ceo-expert-profile').style.display = 'none';
+            document.getElementById('ax-expert-profile').style.display = 'none';
+        }
+
+        // View individual mentor profile
+        function viewMentorProfile(mentorType) {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('all-mentors-section').style.display = 'none';
+            document.getElementById('ai-expert-profile').style.display = 'none';
+            document.getElementById('ceo-expert-profile').style.display = 'none';
+            document.getElementById('ax-expert-profile').style.display = 'none';
+
+            switch(mentorType) {
+                case 'ai-expert':
+                    document.getElementById('ai-expert-profile').style.display = 'block';
+                    break;
+                case 'ceo-expert':
+                    document.getElementById('ceo-expert-profile').style.display = 'block';
+                    break;
+                case 'ax-expert':
+                    document.getElementById('ax-expert-profile').style.display = 'block';
+                    break;
+            }
+        }
+
+        // Match mentor based on quiz answers
+        function matchMentor() {
+            const challenge = document.querySelector('input[name="challenge"]:checked');
+            const need = document.querySelector('input[name="need"]:checked');
+
+            if (!challenge || !need) {
+                alert('두 질문 모두 답변해 주세요');
+                return;
+            }
+
+            let recommendedMentor = 'ai-expert';
+
+            // Matching logic
+            if (challenge.value === 'expansion' || need.value === 'strategy') {
+                recommendedMentor = 'ceo-expert';
+            } else if (challenge.value === 'differentiation' || need.value === 'practical') {
+                recommendedMentor = 'ax-expert';
+            } else if (challenge.value === 'ai-adoption' || need.value === 'technical') {
+                recommendedMentor = 'ai-expert';
+            }
+
+            viewMentorProfile(recommendedMentor);
+        }
+
+        // Go back function
+        function goBack() {
+            showAllMentors();
+        }
+
+        // Initialize based on URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const mentorParam = getMentorParam();
+
+            if (mentorParam) {
+                viewMentorProfile(mentorParam);
+            }
+
+            // Navbar toggle functionality
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarNav = document.getElementById('navbarNav');
+
+            navbarToggle.addEventListener('click', function() {
+                navbarNav.classList.toggle('open');
+            });
+
+            // Close menu when a link is clicked
+            const navLinks = navbarNav.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navbarNav.classList.remove('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
