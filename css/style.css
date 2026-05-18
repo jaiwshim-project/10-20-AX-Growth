@@ -94,6 +94,9 @@ body {
     background: var(--gradient-bg);
     background-attachment: fixed;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* ----- 상단 네비게이션 바 ----- */
@@ -192,12 +195,22 @@ body {
 /* ----- 레이아웃 구조 ----- */
 .main-container {
     display: flex;
-    min-height: calc(100vh - 70px);
+    flex: 1;
     background: var(--gradient-bg);
     flex-direction: column;
 }
 
 .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ----- 컨테이너 스타일 ----- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
     flex: 1;
     display: flex;
     flex-direction: column;
