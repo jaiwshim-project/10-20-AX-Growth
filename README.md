@@ -67,75 +67,74 @@
 
 ## 사용 방법
 
-### 빠른 시작
+### 빠른 시작 (로컬에서 실행)
 
 #### 1. 프로젝트 설정
 ```bash
-# 저장소 클론
+# 저장소 클론 (또는 다운로드)
 git clone <repository-url>
 cd ax-growth-navigator
 
-# 의존성 설치
-npm install
+# 또는 Python 내장 웹 서버 사용
+python -m http.server 8000
 
-# 환경 변수 설정
-cp .env.example .env
-# .env 파일에서 API 키 등 설정
+# 또는 Node.js http-server 사용
+npx http-server
 ```
 
-#### 2. 기본 사용
+#### 2. 웹 브라우저에서 접속
+```
+http://localhost:8000
+```
+
+#### 3. Vercel에 배포 (선택사항)
 ```bash
-# 애플리케이션 시작
-npm start
+# Vercel CLI 설치
+npm i -g vercel
 
-# 개발 모드 (Hot reload)
-npm run dev
+# 배포
+vercel
 
-# 프로덕션 빌드
-npm run build
-```
-
-#### 3. 웹 인터페이스 접속
-```
-http://localhost:3000
+# 또는 GitHub에서 자동 배포
+# GitHub Repo → Vercel 연결 → 자동 배포
 ```
 
 ### 단계별 가이드
 
-#### Step 1: 기업 정보 입력
-1. 대시보드에서 "새 프로젝트 시작" 클릭
-2. 기업 명, 산업, 매출규모, 직원수 입력
-3. "다음" 클릭
+#### Step 1: 홈 페이지 접속
+1. 브라우저에서 `http://localhost:8000` 접속
+2. 홈 페이지에서 "지금 진단 시작" 버튼 클릭
+3. **사용 매뉴얼**: 우측 상단 "📖 매뉴얼" 링크로 상세 가이드 확인 가능
 
-#### Step 2: 진단 설문 완료
-1. 6가지 카테고리별 설문 진행 (약 15분)
-2. 각 질문에 5점 척도로 응답
-3. 진단 분석 자동 생성 대기
+#### Step 2: AI 검색 진단 수행
+1. **진단 페이지** (`diagnosis.html`)로 이동
+2. 8개 핵심 항목별로 5점 척도 평가 (약 10분)
+3. 실시간 점수 계산 및 5단계 성숙도 등급 확인
 
-#### Step 3: 진단 결과 검토
-1. 전체 점수 및 등급 확인
-2. 강점/약점 분석 검토
-3. 우선순위 추천 항목 확인
+#### Step 3: 진단 결과 분석
+1. 종합 점수 및 강점/약점 분석 검토
+2. 우선순위 추천 항목 확인
+3. 데이터는 자동 저장됨 (로컬 스토리지)
 
-#### Step 4: 우선순위 세팅
-1. 자동 추천된 과제 검토
-2. 필요시 추가 과제 입력
-3. 우선순위 조정
+#### Step 4: AI 활용 우선순위 설정
+1. **우선순위 페이지** (`priority.html`)로 이동
+2. 진단 결과 기반 상위 10개 과제 자동 추출
+3. TOP 10 우선순위 목록 및 ROI 점수 검토
 
-#### Step 5: 시나리오 선택
-1. 보수/성장/혁신 3가지 시나리오 비교
-2. 각 시나리오별 KPI 예측 검토
-3. 선호하는 시나리오 선택
+#### Step 5: 부서별 시나리오 검토
+1. **시나리오 페이지** (`scenarios.html`)로 이동
+2. 6개 부서별 AI 활용 시나리오 비교 (경영진, 마케팅, 영업, R&D, 재무, 인사)
+3. 각 시나리오별 주간 절감 시간 및 기대 효과 확인
 
-#### Step 6: 실행 로드맵 확인
-1. 분기별 마일스톤 확인
-2. 각 항목별 담당자/예산 설정
-3. 최종 리포트 생성
+#### Step 6: ROI 리포트 생성 및 분석
+1. **리포트 페이지** (`report.html`)로 이동
+2. 월별 KPI 대시보드 확인 (6개 주요 지표)
+3. 부서별 성과 비교 및 전월 대비 추이 분석
 
-#### Step 7: 리포트 다운로드
-1. HTML 리포트 다운로드 (인터랙티브)
-2. PDF 버전 다운로드 (인쇄용)
-3. 팀과 공유 및 실행 착수
+#### Step 7: 리포트 다운로드 및 공유
+1. 리포트 페이지에서 **"PDF 다운로드"** 버튼 클릭
+2. 생성된 PDF를 팀과 공유
+3. 실행 계획 수립 및 착수
 
 ---
 
@@ -146,96 +145,43 @@ ax-growth-navigator/
 ├── README.md                    # 프로젝트 설명서 (본 파일)
 ├── CLAUDE.md                    # Claude 개발 환경 설정
 ├── .gitignore                   # Git 무시 파일 목록
-├── package.json                 # Node.js 프로젝트 설정
-├── package-lock.json            # 의존성 잠금 파일
+├── LICENSE                      # MIT 라이선스
 │
-├── src/                         # 소스 코드
-│   ├── index.html              # 메인 HTML 파일
-│   ├── styles/                 # 스타일시트
-│   │   ├── main.css            # 메인 스타일
-│   │   ├── theme.css           # 테마 설정
-│   │   └── responsive.css      # 반응형 디자인
-│   │
-│   ├── js/                     # JavaScript 코드
-│   │   ├── app.js              # 메인 애플리케이션 로직
-│   │   ├── api.js              # API 통신 모듈
-│   │   │
-│   │   ├── engines/            # 4대 모듈
-│   │   │   ├── diagnosis.js    # 진단 엔진
-│   │   │   ├── priority.js     # 우선순위 엔진
-│   │   │   ├── scenarios.js    # 시나리오 엔진
-│   │   │   └── report.js       # 리포트 엔진
-│   │   │
-│   │   ├── components/         # UI 컴포넌트
-│   │   │   ├── dashboard.js    # 대시보드
-│   │   │   ├── survey.js       # 진단 설문
-│   │   │   ├── results.js      # 결과 표시
-│   │   │   ├── scenarios.js    # 시나리오 비교
-│   │   │   └── roadmap.js      # 로드맵 표시
-│   │   │
-│   │   ├── utils/              # 유틸리티
-│   │   │   ├── helpers.js      # 도우미 함수
-│   │   │   ├── validators.js   # 입력 검증
-│   │   │   └── formatters.js   # 데이터 포맷팅
-│   │   │
-│   │   └── config.js           # 설정 파일
-│   │
-│   └── data/                   # 데이터 파일
-│       ├── surveys.json        # 설문 문항
-│       ├── categories.json     # 분석 카테고리
-│       ├── scenarios.json      # 시나리오 템플릿
-│       └── templates.json      # 리포트 템플릿
+├── 📄 HTML 페이지 (루트)
+│   ├── index.html              # 홈 페이지 (랜딩 페이지)
+│   ├── diagnosis.html          # AX 진단 페이지
+│   ├── priority.html           # 우선순위 분석 페이지
+│   ├── scenarios.html          # 부서별 시나리오 페이지
+│   ├── report.html             # ROI 리포트 페이지
+│   └── manual.html             # 사용자 매뉴얼
 │
-├── public/                     # 정적 파일
-│   ├── favicon.ico            # 파비콘
-│   ├── images/                # 이미지 자산
-│   │   ├── logo.svg           # 로고
-│   │   ├── icons/             # 아이콘 세트
-│   │   └── illustrations/     # 일러스트레이션
-│   │
-│   └── templates/             # HTML 템플릿
-│       ├── report.html        # 리포트 템플릿
-│       └── email.html         # 이메일 템플릿
+├── css/                        # 스타일시트
+│   └── style.css              # 통합 스타일 (반응형 + 프리미엄 테마)
 │
-├── tests/                     # 테스트 코드
-│   ├── unit/                  # 단위 테스트
-│   │   ├── diagnosis.test.js
-│   │   ├── priority.test.js
-│   │   ├── scenarios.test.js
-│   │   └── report.test.js
-│   │
-│   ├── integration/           # 통합 테스트
-│   │   └── workflow.test.js
-│   │
-│   └── e2e/                   # E2E 테스트
-│       └── user-journey.test.js
+├── js/                        # JavaScript 로직
+│   └── app.js                 # 전역 상태 관리 (AppState + localStorage)
 │
-├── docs/                      # 문서
-│   ├── API.md                 # API 문서
-│   ├── SETUP.md              # 설치 가이드
-│   ├── DEPLOYMENT.md         # 배포 가이드
-│   ├── ARCHITECTURE.md       # 아키텍처 문서
-│   └── CONTRIBUTING.md       # 기여 가이드
+├── data/                      # 데이터 파일
+│   ├── scenarios.json         # 6개 부서별 AI 활용 시나리오 데이터
+│   ├── kpi-metrics.json       # ROI 리포트 KPI 정의 및 샘플 데이터
+│   └── ax-scores.json         # 진단 점수 스키마
 │
-├── .env.example              # 환경 변수 예시
-├── .claude/                  # Claude 설정
-│   └── settings.local.json   # 로컬 설정
-│
-├── architecture.svg          # 아키텍처 다이어그램
-└── LICENSE                   # 라이선스 파일
+└── architecture.svg           # 시스템 아키텍처 다이어그램
+
 ```
 
-### 주요 디렉토리 설명
+### 주요 파일 설명
 
-| 디렉토리 | 설명 |
-|----------|------|
-| `src/` | 핵심 소스 코드 |
-| `src/js/engines/` | 4대 모듈 구현 |
-| `src/js/components/` | 웹 UI 컴포넌트 |
-| `src/data/` | 설문, 시나리오 등 데이터 |
-| `public/` | 정적 자산 (이미지, 템플릿) |
-| `tests/` | 테스트 코드 |
-| `docs/` | 기술 문서 |
+| 파일 | 설명 | 라인 수 |
+|------|------|--------|
+| `index.html` | 랜딩 페이지 + 플로우 가이드 | ~400 |
+| `diagnosis.html` | 8개 항목 × 5점 척도 설문 + 실시간 점수 | ~580 |
+| `priority.html` | 진단 결과 기반 TOP 10 우선순위 자동 추출 | ~450 |
+| `scenarios.html` | 6개 부서별 4가지 AI 활용 시나리오 비교 | ~600 |
+| `report.html` | 월별 KPI 대시보드 + 차트 + PDF 다운로드 | ~550 |
+| `manual.html` | 상세 사용 가이드 | ~400 |
+| `css/style.css` | 반응형 그리드 + 프리미엄 화이트 테마 | ~600 |
+| `js/app.js` | AppState (localStorage 기반 상태 관리) | ~90 |
 
 ---
 
@@ -278,6 +224,24 @@ ax-growth-navigator/
 - **호스팅**: Vercel / AWS EC2 / Docker
 - **CI/CD**: GitHub Actions
 - **모니터링**: Sentry (에러 추적)
+
+---
+
+## 브라우저 호환성
+
+| 브라우저 | 지원 버전 | 상태 |
+|---------|---------|------|
+| Chrome | 90+ | ✅ 완벽 지원 |
+| Firefox | 88+ | ✅ 완벽 지원 |
+| Safari | 14+ | ✅ 완벽 지원 |
+| Edge | 90+ | ✅ 완벽 지원 |
+| Internet Explorer | 모든 버전 | ❌ 미지원 |
+
+**필요 기능:**
+- HTML5 + CSS3 (Grid, Flexbox, Gradient)
+- JavaScript ES6+
+- localStorage (데이터 저장용)
+- Chart.js (KPI 대시보드용)
 
 ---
 

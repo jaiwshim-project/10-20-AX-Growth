@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX 진단 - AX Growth Navigator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --blue-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            --purple-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            --slate-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --green-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --amber-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --red-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            background: var(--blue-gradient);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.5rem 0;
+            color: #1e293b;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.25rem;
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .tab-button.active {
+            background: var(--blue-gradient);
+            color: white;
+            border-color: #0284c7;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .area-card {
+            border-left: 5px solid;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .area-card.leadership {
+            border-left-color: #0ea5e9;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.data {
+            border-left-color: #8b5cf6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.application {
+            border-left-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.adoption {
+            border-left-color: #f59e0b;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.competency {
+            border-left-color: #ec4899;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.automation {
+            border-left-color: #6366f1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.tools {
+            border-left-color: #14b8a6;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.governance {
+            border-left-color: #ef4444;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.measurement {
+            border-left-color: #f97316;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-card.improvement {
+            border-left-color: #06b6d4;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }
+
+        .area-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .question-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .rating-btn {
+            width: 3rem;
+            height: 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            background: #f8fafc;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+
+        .rating-btn:hover {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+        }
+
+        .rating-btn.selected {
+            background: var(--blue-gradient);
+            color: white;
+            border-color: #0284c7;
+        }
+
+        .rating-btn.selected.score-1 {
+            background: var(--red-gradient);
+            border-color: #dc2626;
+        }
+
+        .rating-btn.selected.score-2 {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            border-color: #ea580c;
+        }
+
+        .rating-btn.selected.score-3 {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            border-color: #ca8a04;
+        }
+
+        .rating-btn.selected.score-4 {
+            background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+            border-color: #65a30d;
+        }
+
+        .rating-btn.selected.score-5 {
+            background: var(--green-gradient);
+            border-color: #059669;
+        }
+
+        .score-display {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .results-section {
+            background: var(--slate-gradient);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 2px solid #e2e8f0;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .score-display-main {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .grade-badge.ax-intro {
+            background: var(--red-gradient);
+        }
+
+        .grade-badge.ax-foundation {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+
+        .grade-badge.ax-accelerator {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+        }
+
+        .grade-badge.ax-advanced {
+            background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+        }
+
+        .grade-badge.ax-leader {
+            background: var(--green-gradient);
+        }
+
+        .grade-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .area-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .area-score-card {
+            background: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .area-score-card h4 {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .area-score-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0284c7;
+            margin-bottom: 0.5rem;
+        }
+
+        .area-score-max {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--blue-gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+            border: 2px solid #cbd5e1;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+            color: #334155;
+        }
+
+        .footer-info {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem 0.75rem;
+            }
+
+            .section-header {
+                font-size: 1.25rem;
+            }
+
+            .tabs-container {
+                gap: 0.25rem;
+            }
+
+            .tab-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            .score-display-main {
+                gap: 1.5rem;
+            }
+
+            .area-scores {
+                grid-template-columns: 1fr;
+            }
+
+            .score-number {
+                font-size: 2.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .hero-section {
+                page-break-after: avoid;
+            }
+
+            .results-section {
+                page-break-inside: avoid;
+            }
+
+            .area-card {
+                page-break-inside: avoid;
+            }
+
+            .tabs-container,
+            .tab-button,
+            .action-buttons {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div style="position: absolute; top: 1rem; left: 1rem;">
+            <a href="index.html" style="color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                ← 돌아가기
+            </a>
+        </div>
+        <h1>AX 수준 진단</h1>
+        <p>귀사의 AI 도입 성숙도를 10개 영역에서 평가합니다</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">각 영역의 5문항에 1~5점으로 응답하세요</p>
+    </section>
+
+    <div class="container">
+        <div class="section-header">진단 영역</div>
+
+        <!-- 진단 진행 상황 표시 및 샘플 데이터 로드 -->
+        <div style="margin-bottom: 2rem; padding: 1rem; background: #f0f9ff; border-radius: 0.5rem; border-left: 4px solid #2563eb;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.9rem; color: #64748b;">진행 상황</span>
+                <span style="font-size: 0.9rem; color: #2563eb; font-weight: 600;"><span id="answered-count">0</span>/50</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #bfdbfe; border-radius: 4px; overflow: hidden;">
+                <div id="progress-bar" style="height: 100%; background: #2563eb; width: 0%; transition: width 0.3s ease;"></div>
+            </div>
+            <button onclick="loadSampleData()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #e0e7ff; border: none; border-radius: 0.375rem; color: #2563eb; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: all 0.2s;">
+                📊 샘플 데이터 로드 (첫 사용자용)
+            </button>
+        </div>
+
+        <div class="tabs-container">
+            <button class="tab-button active" data-tab="0">AI 리더십</button>
+            <button class="tab-button" data-tab="1">데이터 준비도</button>
+            <button class="tab-button" data-tab="2">업무 적용성</button>
+            <button class="tab-button" data-tab="3">부서별 활용도</button>
+            <button class="tab-button" data-tab="4">직원 역량</button>
+            <button class="tab-button" data-tab="5">자동화 수준</button>
+            <button class="tab-button" data-tab="6">도구 활용</button>
+            <button class="tab-button" data-tab="7">보안·거버넌스</button>
+            <button class="tab-button" data-tab="8">성과 측정</button>
+            <button class="tab-button" data-tab="9">지속 개선</button>
+        </div>
+
+        <div id="areas-container"></div>
+
+        <div class="results-section">
+            <div class="results-title">진단 결과</div>
+
+            <div class="score-display-main">
+                <div class="score-item">
+                    <div class="score-label">총 점수</div>
+                    <div class="score-number" id="total-score">0</div>
+                    <div class="score-bar">
+                        <div class="score-bar-fill" id="total-score-bar" style="background: var(--blue-gradient); width: 0%;"></div>
+                    </div>
+                    <div class="score-label" style="margin-top: 0.75rem;">/ 100점</div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">AX 성숙도 등급</div>
+                    <div class="grade-badge" id="grade-badge">AX 준비 전 단계</div>
+                    <div class="grade-label" id="grade-description">AI 도입 초기 단계</div>
+                </div>
+            </div>
+
+            <div style="border-top: 2px solid #cbd5e1; padding-top: 2rem; margin-top: 2rem;">
+                <div style="font-weight: 600; color: #1e293b; margin-bottom: 1rem;">영역별 점수</div>
+                <div class="area-scores" id="area-scores-container"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="window.print()">PDF 다운로드</button>
+                <button class="btn btn-secondary" onclick="downloadAsCSV()">CSV 다운로드</button>
+                <button class="btn btn-secondary" onclick="saveToLocalStorage()">결과 저장</button>
+                <button class="btn btn-secondary" onclick="resetDiagnosis()">초기화</button>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>이 진단 결과는 귀사의 AI 도입 현황을 파악하고 우선순위를 결정하는 데 활용됩니다.</p>
+            <p style="margin-top: 0.5rem;">상세한 권장 사항은 '우선순위 추천' 페이지를 참고하세요.</p>
+        </div>
+    </div>
+
+    <script>
+        const areas = [
+            {
+                name: 'AI 리더십',
+                key: 'leadership',
+                class: 'leadership',
+                questions: [
+                    'AI 도입을 위한 명확한 비전과 전략이 있는가?',
+                    '경영진이 AI 도입을 전략적으로 지원하는가?',
+                    'AI 관련 조직 구조나 담당자가 명확히 지정되어 있는가?',
+                    'AI 도입을 위한 예산이 정기적으로 할당되는가?',
+                    'AI 도입 추진 현황을 정기적으로 점검하는가?'
+                ]
+            },
+            {
+                name: '데이터 준비도',
+                key: 'data',
+                class: 'data',
+                questions: [
+                    '필요한 비즈니스 데이터가 충분히 확보되어 있는가?',
+                    '데이터의 품질(정확성, 일관성)이 양호한가?',
+                    '데이터가 표준화된 형식으로 통합 관리되고 있는가?',
+                    '데이터 접근성과 활용 권한 관리가 적절히 이루어지는가?',
+                    '데이터 거버넌스 정책이 있고 실행되는가?'
+                ]
+            },
+            {
+                name: '업무 적용성',
+                key: 'application',
+                class: 'application',
+                questions: [
+                    'AI로 자동화 또는 개선할 수 있는 주요 업무 프로세스가 있는가?',
+                    '식별된 AI 적용 업무가 현실적으로 추진 가능한가?',
+                    'AI 솔루션으로 기대할 수 있는 비즈니스 가치가 명확한가?',
+                    '기존 시스템과의 통합이 기술적으로 가능한가?',
+                    'AI 도입으로 인한 업무 프로세스 변경에 대한 계획이 있는가?'
+                ]
+            },
+            {
+                name: '부서별 활용도',
+                key: 'adoption',
+                class: 'adoption',
+                questions: [
+                    '영업·마케팅 부서에서 AI 도구를 활용 중인가?',
+                    '고객 서비스 부서에서 AI 도구를 활용 중인가?',
+                    'HR/인사 부서에서 AI 도구를 활용 중인가?',
+                    '재무·회계 부서에서 AI 도구를 활용 중인가?',
+                    '전략·기획 부서에서 AI 도구를 활용 중인가?'
+                ]
+            },
+            {
+                name: '직원 AI 역량',
+                key: 'competency',
+                class: 'competency',
+                questions: [
+                    '직원들이 AI 기초 개념을 이해하고 있는가?',
+                    'AI 도구 사용법에 대한 교육이 정기적으로 제공되는가?',
+                    'AI 문제 해결 능력을 갖춘 인력이 충분한가?',
+                    '직원들의 AI에 대한 관심과 수용도가 높은가?',
+                    '부서별 AI 리더 또는 챔피언이 존재하는가?'
+                ]
+            },
+            {
+                name: '자동화 수준',
+                key: 'automation',
+                class: 'automation',
+                questions: [
+                    '자동화된 업무 프로세스(RPA, 워크플로우 등)가 있는가?',
+                    '자동화된 데이터 수집·처리 시스템이 운영 중인가?',
+                    '자동 보고서 또는 리포트 생성 시스템이 있는가?',
+                    '반복적인 의사결정 프로세스가 자동화되어 있는가?',
+                    '자동화 수준이 지속적으로 확대되고 있는가?'
+                ]
+            },
+            {
+                name: 'AI 도구 활용',
+                key: 'tools',
+                class: 'tools',
+                questions: [
+                    'ChatGPT, Claude 등 생성형 AI 도구를 도입했는가?',
+                    '업무별 맞춤형 AI 솔루션(챗봇, 분석 도구 등)을 사용 중인가?',
+                    'AI 도구에 대한 라이선스 관리가 체계적으로 이루어지는가?',
+                    '새로운 AI 기술 도입을 위한 검증 절차가 있는가?',
+                    '직원들이 승인된 AI 도구를 자유롭게 사용할 수 있는가?'
+                ]
+            },
+            {
+                name: '보안·거버넌스',
+                key: 'governance',
+                class: 'governance',
+                questions: [
+                    'AI 도구 및 데이터 사용 가이드라인이 있는가?',
+                    '개인정보 보호와 데이터 보안 정책이 마련되어 있는가?',
+                    'AI 모델의 투명성과 설명 가능성 기준이 있는가?',
+                    'AI 도구 사용으로 인한 리스크를 정기적으로 평가하는가?',
+                    'AI 거버넌스 관련 정책이 정기적으로 검토·업데이트되는가?'
+                ]
+            },
+            {
+                name: '성과 측정',
+                key: 'measurement',
+                class: 'measurement',
+                questions: [
+                    'AI 도입 사업의 성공 지표(KPI)가 정의되어 있는가?',
+                    '정량적 성과(비용 절감, 매출 증가 등)를 측정하고 있는가?',
+                    '정성적 성과(직원 만족도, 고객 경험 등)를 평가하고 있는가?',
+                    'AI 도입으로 인한 ROI를 계산하고 있는가?',
+                    '성과 측정 결과를 다음 추진 계획에 반영하고 있는가?'
+                ]
+            },
+            {
+                name: '지속 개선',
+                key: 'improvement',
+                class: 'improvement',
+                questions: [
+                    'AI 도입 과정에서 발생하는 문제점을 지속적으로 수집하는가?',
+                    '직원 피드백을 반영하여 AI 도구나 프로세스를 개선하는가?',
+                    'AI 기술 및 시장 트렌드를 정기적으로 모니터링하는가?',
+                    '벤치마킹을 통해 업계 우수 사례를 학습하고 있는가?',
+                    '지속 개선을 위한 전담 조직이나 프로세스가 있는가?'
+                ]
+            }
+        ];
+
+        const gradeThresholds = [
+            { score: 0, grade: 'AX 준비 전 단계', label: '(0~20점)', description: 'AI 도입 초기 단계' },
+            { score: 21, grade: 'AX 입문자', label: '(21~40점)', description: 'AI 도입 초기, 전략 수립 필요' },
+            { score: 41, grade: 'AX 재단자', label: '(41~60점)', description: 'AI 기초 구축 단계, 확대 필요' },
+            { score: 61, grade: 'AX 가속자', label: '(61~80점)', description: 'AI 활발한 도입, 최적화 추진' },
+            { score: 81, grade: 'AX 리더', label: '(81~100점)', description: 'AI 중심 경영, 지속 혁신' }
+        ];
+
+        let scores = {};
+
+        // 진단 영역별 탭 및 질문 UI 생성
+        // 10개 영역 × 5개 질문 = 50개 문항을 탭 기반 UI로 동적 생성
+        function initializeAreas() {
+            const container = document.getElementById('areas-container');
+            container.innerHTML = '';
+
+            areas.forEach((area, index) => {
+                const content = document.createElement('div');
+                content.className = `tab-content ${index === 0 ? 'active' : ''}`;
+                content.id = `tab-${index}`;
+
+                let questionsHTML = '';
+                area.questions.forEach((question, qIndex) => {
+                    const areaKey = area.key;
+                    const questionKey = `${areaKey}-${qIndex}`;
+
+                    questionsHTML += `
+                        <div class="question-group">
+                            <div class="question-label">
+                                <span>Q${qIndex + 1}. ${question}</span>
+                            </div>
+                            <div class="rating-scale">
+                                ${[1, 2, 3, 4, 5].map(score => `
+                                    <button class="rating-btn" onclick="setScore('${questionKey}', ${score})" data-score="${score}" data-question="${questionKey}">
+                                        ${score}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div class="score-display" id="display-${questionKey}"></div>
+                        </div>
+                    `;
+                });
+
+                content.innerHTML = `
+                    <div class="area-card ${area.class}">
+                        <div class="area-title">${area.name}</div>
+                        ${questionsHTML}
+                    </div>
+                `;
+
+                container.appendChild(content);
+            });
+
+            loadFromLocalStorage();
+            calculateScores();
+        }
+
+        // 특정 질문의 점수 기록 및 UI 업데이트 (1~5점)
+        function setScore(questionKey, score) {
+            scores[questionKey] = score;
+
+            const buttons = document.querySelectorAll(`[data-question="${questionKey}"]`);
+            buttons.forEach(btn => {
+                btn.classList.remove('selected', 'score-1', 'score-2', 'score-3', 'score-4', 'score-5');
+                if (parseInt(btn.dataset.score) === score) {
+                    btn.classList.add('selected', `score-${score}`);
+                }
+            });
+
+            const labels = ['', '매우 미흡', '미흡', '보통', '양호', '우수'];
+            const colors = ['', '#ef4444', '#f97316', '#eab308', '#84cc16', '#10b981'];
+            document.getElementById(`display-${questionKey}`).innerHTML = `${labels[score]} (${score}점)`;
+
+            calculateScores();
+        }
+
+        // 실시간 점수 계산: 10개 영역 × 5점 = 최대 100점
+        // 각 영역별 부분점(0~5)과 총점을 계산하여 진행바 업데이트
+        function calculateScores() {
+            const areaScores = {};
+            let totalScore = 0;
+            let answeredCount = 0;
+
+            areas.forEach(area => {
+                let areaTotal = 0;
+                for (let i = 0; i < 5; i++) {
+                    const questionKey = `${area.key}-${i}`;
+                    if (scores[questionKey]) {
+                        answeredCount++;
+                    }
+                    areaTotal += scores[questionKey] || 0;
+                }
+                areaScores[area.key] = areaTotal;
+                totalScore += areaTotal;
+            });
+
+            document.getElementById('total-score').textContent = totalScore;
+            const percentage = (totalScore / 100) * 100;
+            document.getElementById('total-score-bar').style.width = percentage + '%';
+
+            // 진행 상황 업데이트
+            document.getElementById('answered-count').textContent = answeredCount;
+            const progressPercentage = (answeredCount / 50) * 100;
+            document.getElementById('progress-bar').style.width = progressPercentage + '%';
+
+            updateGrade(totalScore);
+            updateAreaScores(areaScores);
+        }
+
+        // 총점에 따른 성숙도 등급 결정 (준비전→입문→재단→가속→리더)
+        // gradeThresholds 배열의 임계값과 비교하여 적절한 등급 배치
+        function updateGrade(totalScore) {
+            let grade = gradeThresholds[0];
+            for (let i = gradeThresholds.length - 1; i >= 0; i--) {
+                if (totalScore >= gradeThresholds[i].score) {
+                    grade = gradeThresholds[i];
+                    break;
+                }
+            }
+
+            const gradeMap = {
+                '준비 전': 'ax-intro',
+                '입문': 'ax-foundation',
+                '재단': 'ax-accelerator',
+                '가속': 'ax-advanced',
+                '리더': 'ax-leader'
+            };
+
+            let badgeClass = 'ax-intro';
+            if (grade.grade.includes('준비 전')) badgeClass = 'ax-intro';
+            else if (grade.grade.includes('입문')) badgeClass = 'ax-foundation';
+            else if (grade.grade.includes('재단')) badgeClass = 'ax-accelerator';
+            else if (grade.grade.includes('가속')) badgeClass = 'ax-advanced';
+            else if (grade.grade.includes('리더')) badgeClass = 'ax-leader';
+
+            const badge = document.getElementById('grade-badge');
+            badge.className = `grade-badge ${badgeClass}`;
+            badge.textContent = grade.grade;
+            document.getElementById('grade-description').textContent = grade.description;
+        }
+
+        function updateAreaScores(areaScores) {
+            const container = document.getElementById('area-scores-container');
+            container.innerHTML = '';
+
+            areas.forEach(area => {
+                const score = areaScores[area.key];
+                const card = document.createElement('div');
+                card.className = 'area-score-card';
+                card.innerHTML = `
+                    <h4>${area.name}</h4>
+                    <div class="area-score-number">${score}</div>
+                    <div class="area-score-max">/ 25점</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 샘플 데이터 로드: 첫 사용자가 앱 기능을 빠르게 체험하도록 미리 채워진 데이터 제공
+        // 샘플 데이터: 중견 기업의 중간 수준 AI 도입 현황
+        function loadSampleData() {
+            const sampleScores = {
+                'leadership-0': 3, 'leadership-1': 2, 'leadership-2': 2, 'leadership-3': 3, 'leadership-4': 2,
+                'data-0': 3, 'data-1': 3, 'data-2': 2, 'data-3': 3, 'data-4': 2,
+                'application-0': 4, 'application-1': 3, 'application-2': 4, 'application-3': 3, 'application-4': 2,
+                'adoption-0': 3, 'adoption-1': 2, 'adoption-2': 2, 'adoption-3': 3, 'adoption-4': 2,
+                'competency-0': 2, 'competency-1': 2, 'competency-2': 2, 'competency-3': 3, 'competency-4': 2,
+                'automation-0': 3, 'automation-1': 2, 'automation-2': 3, 'automation-3': 2, 'automation-4': 2,
+                'tools-0': 4, 'tools-1': 3, 'tools-2': 2, 'tools-3': 2, 'tools-4': 1,
+                'governance-0': 2, 'governance-1': 2, 'governance-2': 1, 'governance-3': 2, 'governance-4': 1,
+                'measurement-0': 3, 'measurement-1': 2, 'measurement-2': 2, 'measurement-3': 2, 'measurement-4': 2,
+                'improvement-0': 2, 'improvement-1': 2, 'improvement-2': 2, 'improvement-3': 2, 'improvement-4': 1
+            };
+
+            scores = sampleScores;
+
+            // UI 업데이트: 선택된 버튼에 스타일 적용
+            Object.entries(sampleScores).forEach(([key, score]) => {
+                const buttons = document.querySelectorAll(`[data-question="${key}"]`);
+                buttons.forEach(btn => {
+                    btn.classList.remove('selected', 'score-1', 'score-2', 'score-3', 'score-4', 'score-5');
+                    if (parseInt(btn.dataset.score) === score) {
+                        btn.classList.add('selected', `score-${score}`);
+                    }
+                });
+                const labels = ['', '매우 미흡', '미흡', '보통', '양호', '우수'];
+                document.getElementById(`display-${key}`).innerHTML = `${labels[score]} (${score}점)`;
+            });
+
+            calculateScores();
+            alert('샘플 데이터가 로드되었습니다.\n중견 기업의 일반적인 AI 도입 수준을 반영한 데이터입니다.');
+        }
+
+        // 진단 결과를 CSV 파일로 다운로드
+        function downloadAsCSV() {
+            let csvContent = 'data:text/csv;charset=utf-8,';
+            csvContent += '진단 영역,질문,점수,평가\n';
+
+            areas.forEach(area => {
+                area.questions.forEach((question, qIndex) => {
+                    const questionKey = `${area.key}-${qIndex}`;
+                    const score = scores[questionKey] || 0;
+                    const labels = ['', '매우 미흡', '미흡', '보통', '양호', '우수'];
+                    csvContent += `"${area.name}","${question}",${score},"${labels[score]}"\n`;
+                });
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', `AX진단_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('ax-diagnosis-scores', JSON.stringify(scores));
+            localStorage.setItem('ax-diagnosis-timestamp', new Date().toISOString());
+            alert('진단 결과가 저장되었습니다.');
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('ax-diagnosis-scores');
+            if (saved) {
+                scores = JSON.parse(saved);
+                Object.entries(scores).forEach(([key, score]) => {
+                    const buttons = document.querySelectorAll(`[data-question="${key}"]`);
+                    buttons.forEach(btn => {
+                        btn.classList.remove('selected', 'score-1', 'score-2', 'score-3', 'score-4', 'score-5');
+                        if (parseInt(btn.dataset.score) === score) {
+                            btn.classList.add('selected', `score-${score}`);
+                        }
+                    });
+                    const labels = ['', '매우 미흡', '미흡', '보통', '양호', '우수'];
+                    document.getElementById(`display-${key}`).innerHTML = `${labels[score]} (${score}점)`;
+                });
+            }
+        }
+
+        function resetDiagnosis() {
+            if (confirm('모든 진단 결과를 초기화하시겠습니까?')) {
+                scores = {};
+                localStorage.removeItem('ax-diagnosis-scores');
+                localStorage.removeItem('ax-diagnosis-timestamp');
+                document.querySelectorAll('.rating-btn').forEach(btn => {
+                    btn.classList.remove('selected', 'score-1', 'score-2', 'score-3', 'score-4', 'score-5');
+                });
+                document.querySelectorAll('.score-display').forEach(el => {
+                    el.innerHTML = '';
+                });
+                calculateScores();
+            }
+        }
+
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(`tab-${button.dataset.tab}`).classList.add('active');
+            });
+        });
+
+        initializeAreas();
+    </script>
+</body>
+</html>

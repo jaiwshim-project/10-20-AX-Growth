@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX Growth Navigator - AI 검색 최적화 플랫폼</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- 사이드바 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">AX Navigator</h2>
+                <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="#/" class="nav-link" data-route="/">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="diagnosis.html" class="nav-link">
+                            <span class="nav-icon">🔍</span>
+                            <span class="nav-text">AX 진단</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="priority.html" class="nav-link">
+                            <span class="nav-icon">⚡</span>
+                            <span class="nav-text">우선순위</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="scenarios.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">부서별 시나리오</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="report.html" class="nav-link">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">ROI 리포트</span>
+                        </a>
+                    </li>
+                    <li class="nav-divider"></li>
+                    <li class="nav-item">
+                        <a href="manual.html" class="nav-link" target="_blank">
+                            <span class="nav-icon">📖</span>
+                            <span class="nav-text">매뉴얼</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 히어로 섹션 -->
+            <section id="hero" class="hero-section">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">AI 검색 최적화로<br><span class="highlight">비즈니스 성장</span>을 가속화하세요</h1>
+                        <p class="hero-subtitle">ChatGPT, Claude, Gemini, Perplexity 등<br>AI 검색에 당신의 콘텐츠를 노출시키고<br>ROI를 극대화하는 플랫폼</p>
+                        <div class="hero-buttons">
+                            <a href="diagnosis.html" class="btn btn-primary">지금 진단 시작</a>
+                            <a href="priority.html" class="btn btn-secondary">결과 보기</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-illustration">
+                            <div class="illustration-circle circle-1"></div>
+                            <div class="illustration-circle circle-2"></div>
+                            <div class="illustration-circle circle-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 현재 상태 섹션 -->
+            <section id="status-section" class="status-section">
+                <div class="section-container">
+                    <h2 class="section-title">현재 진단 상태</h2>
+                    <div class="status-card" id="statusCard">
+                        <div class="status-content">
+                            <div class="status-icon">📋</div>
+                            <div class="status-text">
+                                <h3>진단을 아직 시작하지 않았습니다</h3>
+                                <p>아래 "지금 진단 시작" 버튼을 클릭하여 AX 진단을 시작하세요.</p>
+                            </div>
+                        </div>
+                        <a href="diagnosis.html" class="btn btn-primary">진단 시작</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4단계 플로우 섹션 -->
+            <section id="flow-section" class="flow-section">
+                <div class="section-container">
+                    <h2 class="section-title">AX 성장 네비게이션 4단계</h2>
+                    <p class="section-subtitle">체계적인 AI 검색 최적화 여정을 따라가세요</p>
+
+                    <div class="flow-grid">
+                        <!-- Step 1: 진단 -->
+                        <div class="flow-card">
+                            <div class="flow-header">
+                                <span class="flow-step">Step 1</span>
+                                <div class="flow-icon">🔍</div>
+                            </div>
+                            <h3 class="flow-title">AI 검색 진단</h3>
+                            <p class="flow-description">
+                                당신의 웹사이트를 8가지 핵심 항목으로 분석합니다.
+                                <ul class="flow-checklist">
+                                    <li>콘텐츠 품질 & SEO</li>
+                                    <li>구조화된 데이터</li>
+                                    <li>백링크 프로필</li>
+                                    <li>모바일 최적화</li>
+                                </ul>
+                            </p>
+                            <a href="diagnosis.html" class="flow-btn">진단 시작 →</a>
+                        </div>
+
+                        <!-- Step 2: 우선순위 -->
+                        <div class="flow-card">
+                            <div class="flow-header">
+                                <span class="flow-step">Step 2</span>
+                                <div class="flow-icon">⚡</div>
+                            </div>
+                            <h3 class="flow-title">우선순위 설정</h3>
+                            <p class="flow-description">
+                                진단 결과를 바탕으로 개선 우선순위를 책정합니다.
+                                <ul class="flow-checklist">
+                                    <li>영향도 분석</li>
+                                    <li>실행 난이도 평가</li>
+                                    <li>ROI 추정</li>
+                                    <li>로드맵 생성</li>
+                                </ul>
+                            </p>
+                            <a href="priority.html" class="flow-btn">우선순위 설정 →</a>
+                        </div>
+
+                        <!-- Step 3: 시나리오 -->
+                        <div class="flow-card">
+                            <div class="flow-header">
+                                <span class="flow-step">Step 3</span>
+                                <div class="flow-icon">📊</div>
+                            </div>
+                            <h3 class="flow-title">부서별 시나리오</h3>
+                            <p class="flow-description">
+                                각 부서의 목표와 예산에 맞는 시나리오를 수립합니다.
+                                <ul class="flow-checklist">
+                                    <li>시나리오 A: 기본</li>
+                                    <li>시나리오 B: 표준</li>
+                                    <li>시나리오 C: 프리미엄</li>
+                                    <li>맞춤형 옵션</li>
+                                </ul>
+                            </p>
+                            <button class="flow-btn" onclick="navigateTo('/scenarios')">시나리오 보기 →</button>
+                        </div>
+
+                        <!-- Step 4: 리포트 -->
+                        <div class="flow-card">
+                            <div class="flow-header">
+                                <span class="flow-step">Step 4</span>
+                                <div class="flow-icon">📈</div>
+                            </div>
+                            <h3 class="flow-title">ROI 리포트</h3>
+                            <p class="flow-description">
+                                개선 효과를 정량적으로 측정하는 리포트를 생성합니다.
+                                <ul class="flow-checklist">
+                                    <li>방문자 증가 예측</li>
+                                    <li>매출 영향 분석</li>
+                                    <li>투자수익률 계산</li>
+                                    <li>월별 추적 대시보드</li>
+                                </ul>
+                            </p>
+                            <button class="flow-btn" onclick="navigateTo('/report')">리포트 생성 →</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 기능 및 효과 섹션 -->
+            <section id="benefits-section" class="benefits-section">
+                <div class="section-container">
+                    <h2 class="section-title">AX Navigator가 제공하는 가치</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">8가지 진단 항목</h4>
+                            <p class="benefit-text">AI 검색에 필요한 모든 요소를 체계적으로 평가합니다.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">100점 만점 평가</h4>
+                            <p class="benefit-text">명확한 스코어로 현재 위치를 파악하세요.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">맞춤형 개선안</h4>
+                            <p class="benefit-text">당신의 상황에 맞는 액션 플랜을 제공합니다.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">ROI 예측</h4>
+                            <p class="benefit-text">투자 대비 기대 효과를 정량적으로 계산합니다.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">프리미엄 HTML 리포트</h4>
+                            <p class="benefit-text">다운로드 및 공유 가능한 전문 리포트를 생성합니다.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <h4 class="benefit-title">부서별 협력</h4>
+                            <p class="benefit-text">마케팅, 개발, 경영진이 함께 성과를 추진합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 푸터 -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2025 AX Growth Navigator. All rights reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <a href="manual.html" target="_blank" class="footer-link">📖 사용 매뉴얼</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- 페이지 콘텐츠가 로드될 영역 -->
+    <div id="page-container" style="display: none;"></div>
+
+    <script src="js/app.js"></script>
+
+    <!-- 브라우저 호환성 체크 -->
+    <script>
+        // 지원하는 브라우저: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+        // localStorage 사용 여부 확인
+        function checkBrowserCompatibility() {
+            try {
+                const test = '__test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch(e) {
+                return false;
+            }
+        }
+
+        if (!checkBrowserCompatibility()) {
+            console.warn('⚠️ 브라우저가 localStorage를 지원하지 않습니다. 데이터가 저장되지 않을 수 있습니다.');
+        }
+
+        // CSS Grid 지원 여부 확인
+        const supportsGrid = CSS && CSS.supports && CSS.supports('display', 'grid');
+        if (!supportsGrid) {
+            console.warn('⚠️ 브라우저가 CSS Grid를 지원하지 않습니다. 레이아웃이 정상적으로 표시되지 않을 수 있습니다.');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI·KPI 월간 개선 리포트 | AX Navigator</title>
+    <meta name="description" content="AI 도입 효과 및 KPI 월간 개선 리포트">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #2563eb;
+            --color-success: #16a34a;
+            --color-warning: #ea580c;
+            --color-danger: #dc2626;
+            --color-text-dark: #1f2937;
+            --color-text-main: #374151;
+            --color-border: #e5e7eb;
+            --color-bg: #f9fafb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #f0f4f8 0%, #ffffff 40%, #ffffff 100%);
+            color: var(--color-text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 12px;
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #6b7280;
+        }
+
+        .ceo-summary {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            border: 2px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .ceo-summary h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+        }
+
+        .ceo-summary p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            line-height: 1.8;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .metric-card.primary {
+            border-top-color: var(--color-primary);
+        }
+
+        .metric-card.success {
+            border-top-color: var(--color-success);
+        }
+
+        .metric-card.warning {
+            border-top-color: var(--color-warning);
+        }
+
+        .metric-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(22, 163, 74, 0.1);
+            color: var(--color-success);
+        }
+
+        .metric-change.negative {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--color-danger);
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 32px;
+            border: 1px solid var(--color-border);
+        }
+
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 24px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 24px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .comparison-table th {
+            background: var(--color-bg);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            border-bottom: 2px solid var(--color-border);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--color-bg);
+        }
+
+        .comparison-table .highlight {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .action-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+
+        .action-section h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-success);
+            margin-bottom: 16px;
+        }
+
+        .action-list {
+            list-style: none;
+        }
+
+        .action-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: var(--color-text-main);
+        }
+
+        .action-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--color-success);
+            font-size: 1.125rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            .button-group {
+                display: none;
+            }
+
+            .chart-container {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 1.5rem;
+            }
+
+            .ceo-summary {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 ROI·KPI 월간 개선 리포트</h1>
+            <div class="report-meta">
+                <div class="meta-item">📅 <span id="current-month"></span></div>
+                <div class="meta-item">📈 <span id="report-status">보고서 작성 중...</span></div>
+            </div>
+        </header>
+
+        <!-- CEO 요약 -->
+        <div class="ceo-summary">
+            <h2>CEO 요약</h2>
+            <p id="ceo-summary-text">이번 달 귀사의 AX 활용이 눈에 띄게 개선되었습니다. 전 부서에서 AI 도구 활용이 증가했으며, 특히 마케팅 팀은 콘텐츠 발행량이 200% 증가했습니다. 영업 팀의 상담 분석 자동화로 전환율이 12.5%까지 상승했으며, 전사적으로 약 126시간의 업무 시간이 절감되었습니다. AI 투자 ROI는 1,680%로 나타나 매우 긍정적인 성과를 보이고 있습니다.</p>
+        </div>
+
+        <!-- 주요 KPI 카드 -->
+        <div class="metrics-grid" id="metrics-container">
+            <!-- Dynamic content -->
+        </div>
+
+        <!-- 월간 추이 차트 -->
+        <div class="chart-section">
+            <h3 class="chart-title">📈 월간 KPI 추이</h3>
+            <div class="chart-container">
+                <canvas id="kpiChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 부서별 성과 -->
+        <div class="chart-section">
+            <h3 class="chart-title">🏢 부서별 AI 활용 성과</h3>
+            <div class="chart-container">
+                <canvas id="departmentChart"></canvas>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>부서</th>
+                        <th>AI 활용 시나리오</th>
+                        <th>절감 시간</th>
+                        <th>생성 결과물</th>
+                    </tr>
+                </thead>
+                <tbody id="department-table">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 이전월 비교 -->
+        <div class="chart-section">
+            <h3 class="chart-title">📊 이전 월 대비 KPI 비교</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>지표</th>
+                        <th>이번 달</th>
+                        <th>지난 달</th>
+                        <th>변화</th>
+                    </tr>
+                </thead>
+                <tbody id="comparison-table">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 다음 달 실행 과제 -->
+        <div class="action-section">
+            <h3>🎯 다음 달 실행 과제</h3>
+            <ul class="action-list">
+                <li>고객 상담 기록 분석 자동화를 표준화하여 전 영업 조직에 확대</li>
+                <li>제안서 자동 생성 프로세스 정비 및 매뉴얼 작성</li>
+                <li>마케팅 팀 블로그 콘텐츠 생성을 AI 기본 도구로 전환</li>
+                <li>R&D 팀 기술문서 분석 자동화 시작</li>
+                <li>전사 AI 활용 교육 2차 실시 (90% 이수율 목표)</li>
+                <li>부서별 AI 챔피언 30일 피드백 회의</li>
+            </ul>
+        </div>
+
+        <!-- 다운로드 및 액션 -->
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="window.print()">📥 PDF 다운로드</button>
+            <button class="btn btn-secondary" onclick="alert('이메일 발송 기능은 다음 버전에서 지원됩니다.')">📧 이메일 발송</button>
+            <button class="btn btn-secondary" onclick="location.href='#/'">← 홈으로</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample KPI Data
+        const kpiData = {
+            currentMonth: {
+                time_saved: 126,
+                cost_saved: 5040000,
+                documents_generated: 42,
+                content_published: 38,
+                conversion_rate: 12.5,
+                sales_opportunities: 3,
+                ai_usage_rate: 68,
+                department_adoption: 83,
+                roi: 1680,
+                payback_period: 0.3
+            },
+            previousMonth: {
+                time_saved: 98,
+                cost_saved: 3920000,
+                documents_generated: 28,
+                content_published: 22,
+                conversion_rate: 11.2,
+                sales_opportunities: 2,
+                ai_usage_rate: 52,
+                department_adoption: 67,
+                roi: 1206,
+                payback_period: 0.4
+            }
+        };
+
+        function renderMetrics() {
+            const metrics = [
+                { label: '절감 시간', value: '126시간/월', icon: '⏱️', change: '+28%', type: 'primary' },
+                { label: '절감 비용', value: '504만원/월', icon: '💰', change: '+28%', type: 'success' },
+                { label: '생성 문서', value: '42건/월', icon: '📄', change: '+50%', type: 'primary' },
+                { label: 'AI 사용률', value: '68%', icon: '🤖', change: '+31%', type: 'warning' },
+                { label: '전환율', value: '12.5%', icon: '📈', change: '+11.6%', type: 'success' },
+                { label: 'ROI', value: '1,680%', icon: '💹', change: '+39%', type: 'success' }
+            ];
+
+            const container = document.getElementById('metrics-container');
+            container.innerHTML = metrics.map(m => `
+                <div class="metric-card ${m.type}">
+                    <div class="metric-icon">${m.icon}</div>
+                    <div class="metric-label">${m.label}</div>
+                    <div class="metric-value">${m.value}</div>
+                    <span class="metric-change">${m.change}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderComparisonTable() {
+            const current = kpiData.currentMonth;
+            const previous = kpiData.previousMonth;
+
+            const rows = [
+                { name: '절감 시간', current: '126h', previous: '98h', change: '+28%' },
+                { name: '절감 비용', current: '504만원', previous: '392만원', change: '+28%' },
+                { name: '생성 문서', current: '42건', previous: '28건', change: '+50%' },
+                { name: '콘텐츠 발행', current: '38건', previous: '22건', change: '+73%' },
+                { name: '전환율', current: '12.5%', previous: '11.2%', change: '+1.3%' },
+                { name: 'AI 사용률', current: '68%', previous: '52%', change: '+31%' },
+                { name: 'ROI', current: '1,680%', previous: '1,206%', change: '+39%' }
+            ];
+
+            const table = document.getElementById('comparison-table');
+            table.innerHTML = rows.map(r => `
+                <tr>
+                    <td><strong>${r.name}</strong></td>
+                    <td class="highlight">${r.current}</td>
+                    <td>${r.previous}</td>
+                    <td><span class="metric-change">${r.change}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderDepartmentTable() {
+            const departments = [
+                { name: '마케팅팀', scenarios: 4, time: 18, results: '블로그 38건, SNS 72건' },
+                { name: '영업팀', scenarios: 4, time: 24, results: '제안서 11건, 팔로우업 64건' },
+                { name: '경영진', scenarios: 4, time: 8, results: 'KPI 분석 4회, 리포트 생성' },
+                { name: 'R&D팀', scenarios: 4, time: 12, results: 'PRD 3건, 특허 아이디어 2건' },
+                { name: '재무팀', scenarios: 4, time: 9, results: '손익 분석 4회, ROI 계산' },
+                { name: '인사팀', scenarios: 4, time: 6, results: '직무기술서 5개, 교육 과정 2개' }
+            ];
+
+            const table = document.getElementById('department-table');
+            table.innerHTML = departments.map(d => `
+                <tr>
+                    <td><strong>${d.name}</strong></td>
+                    <td>${d.scenarios}</td>
+                    <td>${d.time}시간</td>
+                    <td>${d.results}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Chart.js를 사용한 KPI 대시보드 시각화
+        // 1) KPI 추이: 라인 차트 (절감시간, AI사용률 월별 비교)
+        // 2) 부서별 성과: 바 차트 (각 부서의 월별 KPI 달성도)
+        function renderCharts() {
+            // KPI 추이 차트: 월별 트렌드를 라인 그래프로 표시
+            const kpiCtx = document.getElementById('kpiChart').getContext('2d');
+            new Chart(kpiCtx, {
+                type: 'line',
+                data: {
+                    labels: ['지난달', '이번달'],
+                    datasets: [
+                        {
+                            label: '절감 시간 (시간)',
+                            data: [98, 126],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'AI 사용률 (%)',
+                            data: [52, 68],
+                            borderColor: '#16a34a',
+                            backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 12 }, padding: 15 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { drawBorder: false }
+                        }
+                    }
+                }
+            });
+
+            // 부서별 성과 차트
+            const deptCtx = document.getElementById('departmentChart').getContext('2d');
+            new Chart(deptCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['마케팅', '영업', '경영', 'R&D', '재무', '인사'],
+                    datasets: [{
+                        label: '절감 시간 (시간)',
+                        data: [18, 24, 8, 12, 9, 6],
+                        backgroundColor: [
+                            'rgba(234, 88, 12, 0.8)',
+                            'rgba(22, 163, 74, 0.8)',
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(147, 51, 234, 0.8)',
+                            'rgba(13, 148, 136, 0.8)',
+                            'rgba(217, 119, 6, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { drawBorder: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function setCurrentMonth() {
+            const now = new Date();
+            const monthName = new Intl.DateTimeFormat('ko-KR', { month: 'long', year: 'numeric' }).format(now);
+            document.getElementById('current-month').textContent = monthName;
+        }
+
+        // Initialize
+        setCurrentMonth();
+        renderMetrics();
+        renderComparisonTable();
+        renderDepartmentTable();
+        renderCharts();
+    </script>
+</body>
+</html>

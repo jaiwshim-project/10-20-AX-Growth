@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용 매뉴얼 - AX Growth Navigator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .manual-container {
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #f9fafb, #ffffff);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .manual-toc {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .manual-toc h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .manual-toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .manual-toc li {
+            margin-bottom: 8px;
+        }
+
+        .manual-toc a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .manual-toc a:hover {
+            text-decoration: underline;
+        }
+
+        .manual-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .manual-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .manual-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        .manual-section p {
+            color: #6b7280;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .manual-section ul,
+        .manual-section ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .manual-section li {
+            margin-bottom: 8px;
+            color: #6b7280;
+        }
+
+        .manual-code {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            color: #374151;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .manual-tip {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .manual-tip p {
+            color: #92400e;
+            margin: 0;
+        }
+
+        .manual-warning {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .manual-warning p {
+            color: #7f1d1d;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .manual-container {
+                padding: 20px;
+            }
+
+            .manual-section {
+                padding: 20px;
+            }
+
+            .manual-section h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">AX Navigator</h2>
+                <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span><span class="nav-text">홈</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="diagnosis.html" class="nav-link"><span class="nav-icon">🔍</span><span class="nav-text">AX 진단</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="priority.html" class="nav-link"><span class="nav-icon">⚡</span><span class="nav-text">우선순위</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="scenarios.html" class="nav-link"><span class="nav-icon">📊</span><span class="nav-text">부서별 시나리오</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="report.html" class="nav-link"><span class="nav-icon">📈</span><span class="nav-text">ROI 리포트</span></a>
+                    </li>
+                    <li class="nav-divider"></li>
+                    <li class="nav-item active">
+                        <a href="manual.html" class="nav-link"><span class="nav-icon">📖</span><span class="nav-text">매뉴얼</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="manual-container">
+                <h1 class="section-title">📖 AX Navigator 사용 매뉴얼</h1>
+                <p class="section-subtitle">AI 검색 최적화 플랫폼을 효과적으로 사용하기 위한 가이드입니다</p>
+
+                <!-- 목차 -->
+                <div class="manual-toc">
+                    <h2>📋 목차</h2>
+                    <ul>
+                        <li><a href="#getting-started">1. 시작하기</a></li>
+                        <li><a href="#diagnosis">2. AX 진단</a></li>
+                        <li><a href="#priority">3. 우선순위 설정</a></li>
+                        <li><a href="#scenarios">4. 부서별 시나리오</a></li>
+                        <li><a href="#report">5. ROI 리포트</a></li>
+                        <li><a href="#faq">6. 자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+
+                <!-- Section 1 -->
+                <div class="manual-section" id="getting-started">
+                    <h3>1. 시작하기 (Getting Started)</h3>
+
+                    <h4>AX Navigator란?</h4>
+                    <p>
+                        AX Navigator는 AI 검색 최적화를 위한 통합 플랫폼입니다. ChatGPT, Claude, Gemini, Perplexity 등의 AI 검색에서
+                        당신의 콘텐츠가 노출되고 인용될 가능성을 높이기 위한 8가지 핵심 평가 항목을 제공합니다.
+                    </p>
+
+                    <h4>핵심 기능</h4>
+                    <ul>
+                        <li><strong>AX 진단:</strong> 웹사이트의 AI 검색 최적화 수준을 8가지 항목으로 평가</li>
+                        <li><strong>우선순위 설정:</strong> 개선 사항을 Impact vs Effort 매트릭스로 분류</li>
+                        <li><strong>부서별 시나리오:</strong> 예산과 목표에 따른 3가지 실행 계획 제시</li>
+                        <li><strong>ROI 리포트:</strong> 예상 효과를 정량적으로 계산하고 추적</li>
+                    </ul>
+
+                    <h4>시스템 요구사항</h4>
+                    <ul>
+                        <li>최신 웹 브라우저 (Chrome, Firefox, Safari, Edge 권장)</li>
+                        <li>JavaScript 활성화 필수</li>
+                        <li>인터넷 연결</li>
+                    </ul>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="manual-section" id="diagnosis">
+                    <h3>2. AX 진단 (AI Search Diagnosis)</h3>
+
+                    <h4>진단 절차</h4>
+                    <ol>
+                        <li>메인 페이지에서 "지금 진단 시작" 버튼 클릭</li>
+                        <li>웹사이트 URL 입력 (https://로 시작)</li>
+                        <li>비즈니스 유형 선택 (전자상거래, SaaS, 블로그 등)</li>
+                        <li>8가지 평가 항목 각각에 대해 0-100점 입력</li>
+                        <li>"진단 완료" 버튼 클릭</li>
+                    </ol>
+
+                    <h4>8가지 평가 항목</h4>
+                    <ul>
+                        <li><strong>콘텐츠 품질 & SEO:</strong> 콘텐츠 길이, 키워드, 가독성 등</li>
+                        <li><strong>구조화된 데이터:</strong> Schema.org, JSON-LD 마크업 구현 정도</li>
+                        <li><strong>백링크 프로필:</strong> 백링크 수와 도메인 권위도</li>
+                        <li><strong>모바일 최적화:</strong> 모바일 반응형 디자인과 Page Speed</li>
+                        <li><strong>AI 노출 최적화:</strong> robots.txt, sitemap, 크롤러 접근성</li>
+                        <li><strong>권위성 & 신뢰도:</strong> E-E-A-T 신호와 저자 정보</li>
+                        <li><strong>사용자 경험 (UX):</strong> 네비게이션, 접근성, 상호작용성</li>
+                        <li><strong>기술 SEO:</strong> SSL, 캐싱, 리다이렉트, 메타 태그</li>
+                    </ul>
+
+                    <div class="manual-tip">
+                        <p><strong>💡 팁:</strong> 각 항목을 객관적으로 평가하세요. 자신 없으면 동료나 SEO 전문가와 함께 평가하는 것을 권장합니다.</p>
+                    </div>
+
+                    <h4>진단 결과 해석</h4>
+                    <ul>
+                        <li><strong>90-100점 (A+):</strong> 탁월함 - 현재 상태 유지하며 지속 개선</li>
+                        <li><strong>80-89점 (A):</strong> 우수 - 추가 개선으로 더 높은 성과 가능</li>
+                        <li><strong>70-79점 (B):</strong> 양호 - 핵심 항목 개선 필요</li>
+                        <li><strong>60-69점 (C):</strong> 기본 - 체계적인 개선 전략 수립 필요</li>
+                        <li><strong>0-59점 (D):</strong> 개선 필요 - 긴급한 개선 필요</li>
+                    </ul>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="manual-section" id="priority">
+                    <h3>3. 우선순위 설정 (Prioritization)</h3>
+
+                    <h4>개선 사항 분류</h4>
+                    <p>
+                        진단 결과는 Impact (영향도)와 Effort (난이도)를 기준으로 3가지로 분류됩니다.
+                    </p>
+
+                    <ul>
+                        <li><strong>Quick Win (우선순위 1):</strong> 높은 영향도 + 낮은 난이도 → 즉시 실행</li>
+                        <li><strong>Strategic (우선순위 2):</strong> 높은 영향도 + 중간 난이도 → 2-4주 내 실행</li>
+                        <li><strong>Backlog (우선순위 3):</strong> 낮은 영향도 또는 높은 난이도 → 장기 계획</li>
+                    </ul>
+
+                    <h4>실행 전략</h4>
+                    <ol>
+                        <li>Quick Win 항목부터 시작하여 즉각적인 성과 달성</li>
+                        <li>팀 동기부여 및 신뢰도 구축</li>
+                        <li>측정 가능한 결과로 ROI 증명</li>
+                        <li>Strategic 항목으로 단계적 이동</li>
+                    </ol>
+
+                    <div class="manual-tip">
+                        <p><strong>💡 팁:</strong> Quick Win부터 시작하면 2-3주 내에 가시적인 성과를 보여줄 수 있습니다. 이는 조직의 참여도를 높이는데 효과적입니다.</p>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="manual-section" id="scenarios">
+                    <h3>4. 부서별 시나리오 (Departmental Scenarios)</h3>
+
+                    <h4>3가지 실행 시나리오</h4>
+                    <p>마케팅, 개발, 경영진의 목표와 예산에 맞춘 3가지 시나리오를 제공합니다.</p>
+
+                    <h4>시나리오 A: 기본 (Basic)</h4>
+                    <ul>
+                        <li>예산: 3-5백만원</li>
+                        <li>기간: 4주</li>
+                        <li>범위: Quick Win 항목 중심</li>
+                        <li>예상 효과: 방문자 15-20% 증가</li>
+                    </ul>
+
+                    <h4>시나리오 B: 표준 (Standard)</h4>
+                    <ul>
+                        <li>예산: 10-15백만원</li>
+                        <li>기간: 8주</li>
+                        <li>범위: Quick Win + Strategic 항목</li>
+                        <li>예상 효과: 방문자 30-50% 증가</li>
+                    </ul>
+
+                    <h4>시나리오 C: 프리미엄 (Premium)</h4>
+                    <ul>
+                        <li>예산: 25-35백만원</li>
+                        <li>기간: 12주</li>
+                        <li>범위: 모든 항목 (Quick Win + Strategic + Backlog)</li>
+                        <li>예상 효과: 방문자 50-100% 증가</li>
+                    </ul>
+
+                    <div class="manual-warning">
+                        <p><strong>⚠️ 주의:</strong> 예산과 기간은 조직의 상황에 따라 조정될 수 있습니다. 리소스 가용성과 우선순위를 고려하여 선택하세요.</p>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="manual-section" id="report">
+                    <h3>5. ROI 리포트 (ROI Report)</h3>
+
+                    <h4>리포트 구성 요소</h4>
+                    <ul>
+                        <li><strong>현재 상태:</strong> 진단 점수 및 각 항목별 상세 평가</li>
+                        <li><strong>개선 방안:</strong> 우선순위별 구체적 액션 플랜</li>
+                        <li><strong>ROI 예측:</strong> 투자 대비 기대 효과 (방문자 증가, 매출 영향 등)</li>
+                        <li><strong>타임라인:</strong> 실행 일정 및 마일스톤</li>
+                        <li><strong>추적 대시보드:</strong> 월별 성과 모니터링</li>
+                    </ul>
+
+                    <h4>ROI 계산 방식</h4>
+                    <ol>
+                        <li>현재 월 방문자 수 기준 설정</li>
+                        <li>개선 시나리오별 예상 방문자 증가율 적용</li>
+                        <li>평균 전환율 x 평균 주문금액으로 매출 영향 계산</li>
+                        <li>투자액 대비 ROI 백분율 산출</li>
+                    </ol>
+
+                    <div class="manual-code">예시:
+월 방문자 10,000명 → 시나리오 B 적용 시 30-50% 증가
+→ 3,000~5,000명 추가 방문자
+→ 전환율 2% x 평균 주문금액 50만원 = 3,000~5,000만원 추가 매출
+→ 투자액 12.5백만원 대비 ROI 240-400%</div>
+
+                    <h4>리포트 활용</h4>
+                    <ul>
+                        <li><strong>경영진 보고:</strong> ROI와 비즈니스 영향도 강조</li>
+                        <li><strong>팀 동기부여:</strong> 성과 목표 공유 및 진전 상황 소통</li>
+                        <li><strong>예산 확보:</strong> 정량적 데이터로 투자 정당화</li>
+                        <li><strong>성과 추적:</strong> 월별 KPI 모니터링</li>
+                    </ul>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="manual-section" id="faq">
+                    <h3>6. 자주 묻는 질문 (FAQ)</h3>
+
+                    <h4>Q1: 진단 점수는 다시 할 수 있나요?</h4>
+                    <p>
+                        네, 언제든 다시 진단을 수행할 수 있습니다. 개선 사항을 적용한 후 진행 상황을 측정하기 위해 주기적인 진단을 권장합니다.
+                        3개월마다 재진단하는 것을 추천합니다.
+                    </p>
+
+                    <h4>Q2: 데이터는 어디에 저장되나요?</h4>
+                    <p>
+                        모든 데이터는 귀사의 브라우저 내 로컬스토리지에 저장됩니다. 서버에 업로드되지 않으므로 정보 보안이 보장됩니다.
+                        브라우저 캐시를 삭제하면 데이터가 사라지므로 주기적으로 백업하시기 바랍니다.
+                    </p>
+
+                    <h4>Q3: 리포트를 다운로드할 수 있나요?</h4>
+                    <p>
+                        네, ROI 리포트는 HTML 형식으로 다운로드 또는 인쇄할 수 있습니다. 이를 통해 경영진에게 공유하거나
+                        팀과 함께 검토할 수 있습니다.
+                    </p>
+
+                    <h4>Q4: 각 항목별 점수는 어떻게 정하나요?</h4>
+                    <p>
+                        각 항목을 객관적으로 평가하세요. 불확실한 부분은:
+                    </p>
+                    <ul>
+                        <li>Google Lighthouse 등 자동 분석 도구 활용</li>
+                        <li>SEO 전문가 상담</li>
+                        <li>동료 팀과 협의</li>
+                        <li>산업 벤치마크 참고</li>
+                    </ul>
+
+                    <h4>Q5: 시나리오 변경은 가능한가요?</h4>
+                    <p>
+                        네, 언제든 시나리오를 변경할 수 있습니다. 초기 선택 후에도 진행 상황에 따라
+                        예산, 일정, 범위를 조정할 수 있습니다.
+                    </p>
+
+                    <h4>Q6: 지원이 필요하면 어떻게 하나요?</h4>
+                    <p>
+                        기술적 지원이나 상세한 컨설팅이 필요하신 경우, 당사 지원팀에 문의하시면
+                        전문가가 도움을 드리겠습니다.
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 48px; padding: 32px; background: #f0f9ff; border-radius: 12px;">
+                    <h3 style="color: #1e40af; margin-bottom: 16px;">더 궁금한 점이 있으신가요?</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px;">
+                        이 매뉴얼이 도움이 되었길 바랍니다. 추가 질문이나 피드백은 언제든 환영합니다.
+                    </p>
+                    <a href="index.html" class="btn btn-primary" style="display: inline-block; margin-top: 16px;">
+                        홈으로 돌아가기
+                    </a>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2025 AX Growth Navigator. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
