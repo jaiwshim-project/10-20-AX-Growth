@@ -1,0 +1,234 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-05-18",
+  "departments": [
+    {
+      "id": "executive",
+      "name": "경영진",
+      "icon": "👔",
+      "color": "#2563eb",
+      "scenarios": [
+        {
+          "title": "주간 경영 현황 요약",
+          "description": "매주 KPI 데이터를 수집하여 자동 분석 및 보고서 생성",
+          "tools": ["Claude", "ChatGPT"],
+          "timePerWeek": 2,
+          "expectedBenefit": "의사결정 속도 30% 향상"
+        },
+        {
+          "title": "월간 KPI 분석",
+          "description": "매월 실적 데이터 자동 분석 및 트렌드 추출",
+          "tools": ["ChatGPT", "Perplexity"],
+          "timePerWeek": 3,
+          "expectedBenefit": "분석 시간 50% 단축"
+        },
+        {
+          "title": "리스크 사전 분석",
+          "description": "잠재적 리스크 요소를 온톨로지 그래프로 분석",
+          "tools": ["Claude"],
+          "timePerWeek": 2,
+          "expectedBenefit": "위험 감지 시간 60% 단축"
+        },
+        {
+          "title": "신사업 아이디어 검토",
+          "description": "신사업 제안을 AI 관점에서 분석 및 진단",
+          "tools": ["Claude", "Perplexity"],
+          "timePerWeek": 1,
+          "expectedBenefit": "기획 품질 향상"
+        }
+      ],
+      "workflow": "주간 데이터 수집 → Claude 심층 분석 → ChatGPT 리포트 생성 → CEO 결재",
+      "expectedROI": "경영 효율성 25% 향상, 의사결정 속도 30% 개선"
+    },
+    {
+      "id": "marketing",
+      "name": "마케팅팀",
+      "icon": "📢",
+      "color": "#ea580c",
+      "scenarios": [
+        {
+          "title": "콘텐츠 주제 자동 발굴",
+          "description": "블로그, SNS, AI 검색 최적화 주제 자동 제안",
+          "tools": ["Perplexity", "ChatGPT"],
+          "timePerWeek": 3,
+          "expectedBenefit": "주제 발굴 시간 70% 단축"
+        },
+        {
+          "title": "블로그 글 자동 생성",
+          "description": "주제 → 초안 → AI 인용 최적화 → 발행까지 자동화",
+          "tools": ["ChatGPT", "Claude"],
+          "timePerWeek": 8,
+          "expectedBenefit": "월간 콘텐츠 발행량 200% 증가"
+        },
+        {
+          "title": "SNS 문안 자동 생성",
+          "description": "블로그 → SNS 문안 자동 생성 및 이미지 태그 제안",
+          "tools": ["ChatGPT", "Gemini"],
+          "timePerWeek": 4,
+          "expectedBenefit": "SNS 포스팅 시간 60% 단축"
+        },
+        {
+          "title": "경쟁사 콘텐츠 분석",
+          "description": "경쟁사 블로그, SNS 콘텐츠 자동 분석",
+          "tools": ["Perplexity"],
+          "timePerWeek": 2,
+          "expectedBenefit": "경쟁 분석 정보 제공"
+        }
+      ],
+      "workflow": "Perplexity 주제 조사 → Claude 구조화 → ChatGPT 글 작성 → Gemini 시각 자료",
+      "expectedROI": "콘텐츠 발행량 200% 증가, 블로그 트래픽 150% 향상"
+    },
+    {
+      "id": "sales",
+      "name": "영업팀",
+      "icon": "💼",
+      "color": "#16a34a",
+      "scenarios": [
+        {
+          "title": "고객 상담 자동 분석",
+          "description": "상담 녹취 → 니즈 추출 → 반대 이유 분석 → 제안 전략 생성",
+          "tools": ["Claude"],
+          "timePerWeek": 10,
+          "expectedBenefit": "상담 분석 자동화, 전환율 15% 향상"
+        },
+        {
+          "title": "제안서 자동 생성",
+          "description": "고객사 정보 → 맞춤 제안서 자동 초안 작성",
+          "tools": ["ChatGPT", "Claude"],
+          "timePerWeek": 6,
+          "expectedBenefit": "제안서 작성 시간 3시간 → 30분"
+        },
+        {
+          "title": "팔로우업 메일 자동화",
+          "description": "상담 내용 기반 자동 팔로우업 이메일 생성",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 8,
+          "expectedBenefit": "팔로우업 시간 80% 단축"
+        },
+        {
+          "title": "고객별 가치제안 생성",
+          "description": "고객사 특성별 맞춤 가치제안 자동 생성",
+          "tools": ["Claude"],
+          "timePerWeek": 2,
+          "expectedBenefit": "제안 차별화, 성약율 10% 향상"
+        }
+      ],
+      "workflow": "상담 녹취 → Claude 분석 → ChatGPT 제안서 초안 → 영업 담당자 검토 → 고객 제출",
+      "expectedROI": "영업 생산성 40% 향상, 전환율 15% 개선"
+    },
+    {
+      "id": "research",
+      "name": "R&D팀",
+      "icon": "🔬",
+      "color": "#9333ea",
+      "scenarios": [
+        {
+          "title": "기술문서 요약 및 분석",
+          "description": "긴 기술문서 자동 요약 및 핵심 개념 추출",
+          "tools": ["Claude"],
+          "timePerWeek": 4,
+          "expectedBenefit": "문서 분석 시간 50% 단축"
+        },
+        {
+          "title": "PRD 자동 작성",
+          "description": "기술 아이디어 → 제품 요구사항 정의서 자동 생성",
+          "tools": ["Claude"],
+          "timePerWeek": 5,
+          "expectedBenefit": "PRD 작성 시간 3일 → 2시간"
+        },
+        {
+          "title": "특허 아이디어 발굴",
+          "description": "개발 과정에서 특허 가능성 요소 자동 추출",
+          "tools": ["Claude"],
+          "timePerWeek": 2,
+          "expectedBenefit": "특허 출원 기회 발굴"
+        },
+        {
+          "title": "경쟁 기술 조사",
+          "description": "최신 기술 트렌드 및 경쟁사 기술 자동 조사",
+          "tools": ["Perplexity"],
+          "timePerWeek": 3,
+          "expectedBenefit": "기술 정보 제공 시간 단축"
+        }
+      ],
+      "workflow": "Claude 기술 분석 → PRD 생성 → Perplexity 경쟁 조사 → 특허 검토",
+      "expectedROI": "개발 생산성 35% 향상, 특허 포트폴리오 강화"
+    },
+    {
+      "id": "finance",
+      "name": "재무팀",
+      "icon": "💰",
+      "color": "#0d9488",
+      "scenarios": [
+        {
+          "title": "월간 손익 자동 분석",
+          "description": "재무 데이터 자동 집계 및 손익 분석 보고서 생성",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 3,
+          "expectedBenefit": "손익 분석 시간 60% 단축"
+        },
+        {
+          "title": "ROI 계산 자동화",
+          "description": "프로젝트별 ROI 자동 계산 및 투자 판단 지원",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 2,
+          "expectedBenefit": "ROI 분석 자동화"
+        },
+        {
+          "title": "예산 시나리오 분석",
+          "description": "예산 시나리오별 손익 자동 계산",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 3,
+          "expectedBenefit": "시나리오 분석 속도 80% 향상"
+        },
+        {
+          "title": "부서별 비용 리포트",
+          "description": "부서별 비용 현황 자동 리포팅",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 2,
+          "expectedBenefit": "리포팅 자동화"
+        }
+      ],
+      "workflow": "데이터 수집 → ChatGPT 분석 → 리포트 자동 생성 → CFO 검토",
+      "expectedROI": "재무 보고 시간 50% 단축, 데이터 기반 의사결정 향상"
+    },
+    {
+      "id": "hr",
+      "name": "인사팀",
+      "icon": "👥",
+      "color": "#d97706",
+      "scenarios": [
+        {
+          "title": "직무기술서 자동 작성",
+          "description": "직무 정보 → 직무기술서 자동 생성",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 2,
+          "expectedBenefit": "직무기술서 작성 시간 50% 단축"
+        },
+        {
+          "title": "AI 역량 진단",
+          "description": "직원 AI 활용 수준 자동 진단 및 교육 계획 수립",
+          "tools": ["Claude"],
+          "timePerWeek": 1,
+          "expectedBenefit": "AI 역량 진단 자동화"
+        },
+        {
+          "title": "교육 과정 자동 설계",
+          "description": "직원 역량별 맞춤 교육 과정 자동 생성",
+          "tools": ["Claude"],
+          "timePerWeek": 2,
+          "expectedBenefit": "교육 설계 시간 40% 단축"
+        },
+        {
+          "title": "성과평가 문항 생성",
+          "description": "직무별 성과평가 문항 자동 생성",
+          "tools": ["ChatGPT"],
+          "timePerWeek": 1,
+          "expectedBenefit": "평가 문항 표준화"
+        }
+      ],
+      "workflow": "직무 정보 수집 → Claude 역량 모델 → ChatGPT 교육 과정 → 인사 검토",
+      "expectedROI": "인사 행정업무 30% 단축, 직원 역량 강화"
+    }
+  ]
+}

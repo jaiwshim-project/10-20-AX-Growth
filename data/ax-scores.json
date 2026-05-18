@@ -1,0 +1,600 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "createdAt": "2026-05-18",
+    "description": "AX Growth Navigator 진단 및 우선순위 데이터 스키마",
+    "organization": ""
+  },
+  "diagnosis": {
+    "timestamp": null,
+    "totalScore": 0,
+    "grade": "AX 준비 전 단계",
+    "areas": {
+      "leadership": {
+        "name": "AI 리더십",
+        "questions": [
+          {
+            "id": "leadership-0",
+            "text": "AI 도입을 위한 명확한 비전과 전략이 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "leadership-1",
+            "text": "경영진이 AI 도입을 전략적으로 지원하는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "leadership-2",
+            "text": "AI 관련 조직 구조나 담당자가 명확히 지정되어 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "leadership-3",
+            "text": "AI 도입을 위한 예산이 정기적으로 할당되는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "leadership-4",
+            "text": "AI 도입 추진 현황을 정기적으로 점검하는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "data": {
+        "name": "데이터 준비도",
+        "questions": [
+          {
+            "id": "data-0",
+            "text": "필요한 비즈니스 데이터가 충분히 확보되어 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "data-1",
+            "text": "데이터의 품질(정확성, 일관성)이 양호한가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "data-2",
+            "text": "데이터가 표준화된 형식으로 통합 관리되고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "data-3",
+            "text": "데이터 접근성과 활용 권한 관리가 적절히 이루어지는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "data-4",
+            "text": "데이터 거버넌스 정책이 있고 실행되는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "application": {
+        "name": "업무 적용성",
+        "questions": [
+          {
+            "id": "application-0",
+            "text": "AI로 자동화 또는 개선할 수 있는 주요 업무 프로세스가 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "application-1",
+            "text": "식별된 AI 적용 업무가 현실적으로 추진 가능한가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "application-2",
+            "text": "AI 솔루션으로 기대할 수 있는 비즈니스 가치가 명확한가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "application-3",
+            "text": "기존 시스템과의 통합이 기술적으로 가능한가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "application-4",
+            "text": "AI 도입으로 인한 업무 프로세스 변경에 대한 계획이 있는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "adoption": {
+        "name": "부서별 활용도",
+        "questions": [
+          {
+            "id": "adoption-0",
+            "text": "영업·마케팅 부서에서 AI 도구를 활용 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "adoption-1",
+            "text": "고객 서비스 부서에서 AI 도구를 활용 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "adoption-2",
+            "text": "HR/인사 부서에서 AI 도구를 활용 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "adoption-3",
+            "text": "재무·회계 부서에서 AI 도구를 활용 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "adoption-4",
+            "text": "전략·기획 부서에서 AI 도구를 활용 중인가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "competency": {
+        "name": "직원 AI 역량",
+        "questions": [
+          {
+            "id": "competency-0",
+            "text": "직원들이 AI 기초 개념을 이해하고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "competency-1",
+            "text": "AI 도구 사용법에 대한 교육이 정기적으로 제공되는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "competency-2",
+            "text": "AI 문제 해결 능력을 갖춘 인력이 충분한가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "competency-3",
+            "text": "직원들의 AI에 대한 관심과 수용도가 높은가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "competency-4",
+            "text": "부서별 AI 리더 또는 챔피언이 존재하는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "automation": {
+        "name": "자동화 수준",
+        "questions": [
+          {
+            "id": "automation-0",
+            "text": "자동화된 업무 프로세스(RPA, 워크플로우 등)가 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "automation-1",
+            "text": "자동화된 데이터 수집·처리 시스템이 운영 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "automation-2",
+            "text": "자동 보고서 또는 리포트 생성 시스템이 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "automation-3",
+            "text": "반복적인 의사결정 프로세스가 자동화되어 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "automation-4",
+            "text": "자동화 수준이 지속적으로 확대되고 있는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "tools": {
+        "name": "AI 도구 활용",
+        "questions": [
+          {
+            "id": "tools-0",
+            "text": "ChatGPT, Claude 등 생성형 AI 도구를 도입했는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "tools-1",
+            "text": "업무별 맞춤형 AI 솔루션(챗봇, 분석 도구 등)을 사용 중인가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "tools-2",
+            "text": "AI 도구에 대한 라이선스 관리가 체계적으로 이루어지는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "tools-3",
+            "text": "새로운 AI 기술 도입을 위한 검증 절차가 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "tools-4",
+            "text": "직원들이 승인된 AI 도구를 자유롭게 사용할 수 있는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "governance": {
+        "name": "보안·거버넌스",
+        "questions": [
+          {
+            "id": "governance-0",
+            "text": "AI 도구 및 데이터 사용 가이드라인이 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "governance-1",
+            "text": "개인정보 보호와 데이터 보안 정책이 마련되어 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "governance-2",
+            "text": "AI 모델의 투명성과 설명 가능성 기준이 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "governance-3",
+            "text": "AI 도구 사용으로 인한 리스크를 정기적으로 평가하는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "governance-4",
+            "text": "AI 거버넌스 관련 정책이 정기적으로 검토·업데이트되는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "measurement": {
+        "name": "성과 측정",
+        "questions": [
+          {
+            "id": "measurement-0",
+            "text": "AI 도입 사업의 성공 지표(KPI)가 정의되어 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "measurement-1",
+            "text": "정량적 성과(비용 절감, 매출 증가 등)를 측정하고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "measurement-2",
+            "text": "정성적 성과(직원 만족도, 고객 경험 등)를 평가하고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "measurement-3",
+            "text": "AI 도입으로 인한 ROI를 계산하고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "measurement-4",
+            "text": "성과 측정 결과를 다음 추진 계획에 반영하고 있는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      },
+      "improvement": {
+        "name": "지속 개선",
+        "questions": [
+          {
+            "id": "improvement-0",
+            "text": "AI 도입 과정에서 발생하는 문제점을 지속적으로 수집하는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "improvement-1",
+            "text": "직원 피드백을 반영하여 AI 도구나 프로세스를 개선하는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "improvement-2",
+            "text": "AI 기술 및 시장 트렌드를 정기적으로 모니터링하는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "improvement-3",
+            "text": "벤치마킹을 통해 업계 우수 사례를 학습하고 있는가?",
+            "score": 0,
+            "rating": ""
+          },
+          {
+            "id": "improvement-4",
+            "text": "지속 개선을 위한 전담 조직이나 프로세스가 있는가?",
+            "score": 0,
+            "rating": ""
+          }
+        ],
+        "totalScore": 0,
+        "maxScore": 25
+      }
+    }
+  },
+  "priority": {
+    "timestamp": null,
+    "initiatives": [
+      {
+        "id": 0,
+        "name": "회의록 요약",
+        "description": "회의 녹음 및 비디오를 텍스트로 변환 후 요점 정리",
+        "suggestedLLM": "Claude, ChatGPT-4",
+        "difficulty": "low",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 1,
+        "name": "제안서 생성",
+        "description": "고객 요구사항 기반 제안서 자동 작성",
+        "suggestedLLM": "Claude, GPT-4 Turbo",
+        "difficulty": "medium",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 2,
+        "name": "보고서 초안",
+        "description": "데이터 입력 후 자동 보고서 생성",
+        "suggestedLLM": "Claude, ChatGPT-4",
+        "difficulty": "low",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 3,
+        "name": "고객 상담 분석",
+        "description": "상담 내용 감정 분석 및 분류",
+        "suggestedLLM": "Claude, Gemini Advanced",
+        "difficulty": "medium",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 4,
+        "name": "마케팅 콘텐츠",
+        "description": "블로그, SNS, 이메일 콘텐츠 자동 생성",
+        "suggestedLLM": "ChatGPT-4, Claude",
+        "difficulty": "low",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 5,
+        "name": "경쟁사 조사",
+        "description": "경쟁사 정보 수집 및 분석",
+        "suggestedLLM": "Claude, Perplexity",
+        "difficulty": "medium",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 6,
+        "name": "인사 채용",
+        "description": "채용 공고 작성 및 입사지원서 초차 스크리닝",
+        "suggestedLLM": "Claude, ChatGPT-4",
+        "difficulty": "medium",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 7,
+        "name": "재무 분석",
+        "description": "재무 데이터 분석 및 예측 모델 생성",
+        "suggestedLLM": "Claude with Code Interpreter",
+        "difficulty": "high",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 8,
+        "name": "고객 이탈 예측",
+        "description": "고객 데이터 기반 이탈 위험도 예측",
+        "suggestedLLM": "Claude, ChatGPT with Plugins",
+        "difficulty": "high",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      },
+      {
+        "id": 9,
+        "name": "프로세스 최적화",
+        "description": "현재 업무 프로세스 분석 및 개선안 제안",
+        "suggestedLLM": "Claude, GPT-4 Turbo",
+        "difficulty": "high",
+        "evaluations": {
+          "frequency": 0,
+          "timeSaving": 0,
+          "revenueImpact": 0,
+          "customerImpact": 0,
+          "dataAvailability": 0,
+          "automationFeasibility": 0,
+          "implementationDifficulty": 0,
+          "risk": 0,
+          "roi": 0,
+          "organizationalAcceptance": 0
+        },
+        "totalScore": 0,
+        "maxScore": 50
+      }
+    ]
+  }
+}

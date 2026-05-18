@@ -1,0 +1,168 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-05-18",
+  "kpis": [
+    {
+      "id": "time_saved",
+      "name": "절감 시간",
+      "category": "생산성",
+      "unit": "시간/월",
+      "description": "AI 활용으로 절감된 업무 시간",
+      "formula": "sum(task_hours_saved)",
+      "benchmark": 50,
+      "icon": "⏱️",
+      "color": "#2563eb"
+    },
+    {
+      "id": "cost_saved",
+      "name": "절감 비용",
+      "category": "재무",
+      "unit": "원/월",
+      "description": "시간 절감으로 인한 인건비 절감",
+      "formula": "sum(time_saved) * avg_hourly_rate",
+      "benchmark": 5000000,
+      "icon": "💰",
+      "color": "#16a34a"
+    },
+    {
+      "id": "documents_generated",
+      "name": "생성 문서",
+      "category": "마케팅",
+      "unit": "건/월",
+      "description": "AI로 자동 생성된 문서 수 (블로그, 제안서, 보고서)",
+      "formula": "count(auto_generated_docs)",
+      "benchmark": 30,
+      "icon": "📄",
+      "color": "#ea580c"
+    },
+    {
+      "id": "content_published",
+      "name": "발행 콘텐츠",
+      "category": "마케팅",
+      "unit": "건/월",
+      "description": "블로그, SNS, 뉴스레터 등 발행 콘텐츠",
+      "formula": "count(published_content)",
+      "benchmark": 20,
+      "icon": "📝",
+      "color": "#ea580c"
+    },
+    {
+      "id": "conversion_rate",
+      "name": "전환율",
+      "category": "영업",
+      "unit": "%",
+      "description": "AI 활용 후 상담 → 계약 전환율",
+      "formula": "(contracts / consultations) * 100",
+      "benchmark": 15,
+      "icon": "📈",
+      "color": "#9333ea"
+    },
+    {
+      "id": "sales_opportunities",
+      "name": "영업 기회",
+      "category": "영업",
+      "unit": "건/월",
+      "description": "AI 분석으로 발굴된 신규 영업 기회",
+      "formula": "count(new_sales_opportunities)",
+      "benchmark": 5,
+      "icon": "🎯",
+      "color": "#9333ea"
+    },
+    {
+      "id": "ai_usage_rate",
+      "name": "AI 사용률",
+      "category": "조직",
+      "unit": "%",
+      "description": "전직원 AI 활용률 (월간)",
+      "formula": "(users_using_ai / total_users) * 100",
+      "benchmark": 60,
+      "icon": "🤖",
+      "color": "#0d9488"
+    },
+    {
+      "id": "department_adoption",
+      "name": "부서 적용률",
+      "category": "조직",
+      "unit": "%",
+      "description": "AI 활용 부서 비율",
+      "formula": "(departments_using_ai / total_departments) * 100",
+      "benchmark": 80,
+      "icon": "🏢",
+      "color": "#0d9488"
+    },
+    {
+      "id": "roi",
+      "name": "ROI",
+      "category": "재무",
+      "unit": "%",
+      "description": "AI 투자 대비 수익률",
+      "formula": "((benefits - ai_cost) / ai_cost) * 100",
+      "benchmark": 200,
+      "icon": "💹",
+      "color": "#16a34a"
+    },
+    {
+      "id": "payback_period",
+      "name": "투자 회수기간",
+      "category": "재무",
+      "unit": "개월",
+      "description": "AI 투자 회수 기간",
+      "formula": "ai_cost / monthly_benefits",
+      "benchmark": 3,
+      "icon": "⏳",
+      "color": "#16a34a"
+    }
+  ],
+  "departmentMetrics": {
+    "executive": {
+      "primary": ["time_saved", "roi"],
+      "secondary": ["sales_opportunities", "conversion_rate"]
+    },
+    "marketing": {
+      "primary": ["documents_generated", "content_published"],
+      "secondary": ["ai_usage_rate", "cost_saved"]
+    },
+    "sales": {
+      "primary": ["conversion_rate", "sales_opportunities"],
+      "secondary": ["time_saved", "ai_usage_rate"]
+    },
+    "research": {
+      "primary": ["documents_generated", "time_saved"],
+      "secondary": ["cost_saved", "ai_usage_rate"]
+    },
+    "finance": {
+      "primary": ["cost_saved", "roi"],
+      "secondary": ["time_saved", "payback_period"]
+    },
+    "hr": {
+      "primary": ["department_adoption", "ai_usage_rate"],
+      "secondary": ["cost_saved", "time_saved"]
+    }
+  },
+  "sampleData": {
+    "currentMonth": {
+      "time_saved": 126,
+      "cost_saved": 5040000,
+      "documents_generated": 42,
+      "content_published": 38,
+      "conversion_rate": 12.5,
+      "sales_opportunities": 3,
+      "ai_usage_rate": 68,
+      "department_adoption": 83,
+      "roi": 1680,
+      "payback_period": 0.3
+    },
+    "previousMonth": {
+      "time_saved": 98,
+      "cost_saved": 3920000,
+      "documents_generated": 28,
+      "content_published": 22,
+      "conversion_rate": 11.2,
+      "sales_opportunities": 2,
+      "ai_usage_rate": 52,
+      "department_adoption": 67,
+      "roi": 1206,
+      "payback_period": 0.4
+    }
+  }
+}

@@ -1,0 +1,149 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+*.bundle.js
+*.min.js
+*.min.css
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.sublime-project
+.sublime-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Testing
+.mocha
+.jest-cache/
+
+# Local test files
+test-results/
+test-data/
+*.test.local.js
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Cache
+.cache/
+.eslintcache
+.stylelintcache
+
+# Output files
+*.tar
+*.tar.gz
+*.zip
+*.rar
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Generated reports
+reports/
+*.html
+!src/index.html
+!public/templates/*.html
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# API credentials
+credentials.json
+service-account-key.json
+
+# Private keys
+*.pem
+*.key
+!example.pem
+
+# System and application specific
+.env.production.local
+.env.test.local
+config.local.js
+
+# IDE specific
+.vscode/settings.json
+.vscode/launch.json
+.vscode/*.code-workspace
+.idea/*
+!.idea/modules.xml
+!.idea/misc.xml
+
+# Package manager lockfiles (optional)
+# Uncomment if you want to commit lockfiles
+# package-lock.json
+# yarn.lock
+
+# Workspace specific
+.claude/
+!.claude/settings.local.json
+
+# Project specific ignore patterns
+admin/
+private/
+secrets/
+downloads/
+uploads/
+
+# Misc
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Runtime
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+.turbo/
