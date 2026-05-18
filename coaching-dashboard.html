@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코칭 대시보드 - AX Growth Navigator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --coaching-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --habit-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --growth-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .coaching-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .coaching-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .coaching-card.nudge {
+            border-left-color: #3b82f6;
+        }
+
+        .coaching-card.tracker {
+            border-left-color: #10b981;
+        }
+
+        .coaching-card.runway {
+            border-left-color: #f59e0b;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 1rem 0;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-box {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-status {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-good {
+            color: #10b981;
+        }
+
+        .status-warning {
+            color: #f59e0b;
+        }
+
+        .status-danger {
+            color: #ef4444;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--coaching-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .coaching-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            border-left: 3px solid;
+        }
+
+        .message-nudge {
+            background: #eff6ff;
+            border-left-color: #3b82f6;
+            color: #1e40af;
+        }
+
+        .message-habit {
+            background: #f0fdf4;
+            border-left-color: #10b981;
+            color: #166534;
+        }
+
+        .message-runway {
+            background: #fffbeb;
+            border-left-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .chart-container {
+            margin-top: 1rem;
+        }
+
+        .phase-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .phase-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-detail {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 네비게이션 바 -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h2 class="navbar-title">AX Navigator</h2>
+            </div>
+            <button class="navbar-toggle" id="navbarToggle">☰</button>
+            <nav class="navbar-nav" id="navbarNav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="diagnosis.html" class="nav-link">
+                            <span class="nav-icon">🔍</span>
+                            <span class="nav-text">AX 진단</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="priority.html" class="nav-link">
+                            <span class="nav-icon">⚡</span>
+                            <span class="nav-text">우선순위</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="scenarios.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">부서별 시나리오</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="report.html" class="nav-link">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">ROI 리포트</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="coaching-dashboard.html" class="nav-link">
+                            <span class="nav-icon">🎓</span>
+                            <span class="nav-text">코칭 대시보드</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="manual.html" class="nav-link" target="_blank">
+                            <span class="nav-icon">📖</span>
+                            <span class="nav-text">매뉴얼</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <main class="main-content">
+            <!-- 히어로 섹션 -->
+            <section style="background: var(--coaching-gradient); color: white; padding: 3rem 1rem; text-align: center;">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">🎓 당신의 성장 코칭</h1>
+                    <p style="font-size: 1.1rem; opacity: 0.95;">AI 검색 최적화 여정에서 습관을 형성하고 성장을 가속화하세요</p>
+                </div>
+            </section>
+
+            <div class="container">
+                <!-- 주간 코칭 메시지 -->
+                <div class="coaching-card nudge">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">💬</span>
+                        <h3 class="card-title">이번 주 코칭 메시지</h3>
+                    </div>
+                    <p id="weekly-nudge" style="color: #475569; font-size: 1rem; line-height: 1.6; margin: 0;"></p>
+                    <div class="coaching-message message-nudge">
+                        <p id="nudge-detail" style="margin: 0; font-size: 0.95rem;"></p>
+                    </div>
+                </div>
+
+                <!-- 습관 추적기 -->
+                <div class="coaching-card tracker">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">📊</span>
+                        <h3 class="card-title">주간 사용 습관</h3>
+                    </div>
+                    <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">당신과 평균 기업의 사용 패턴 비교</p>
+
+                    <div class="metric-grid">
+                        <div class="metric-box">
+                            <div class="metric-label">월 진단 횟수 (당신)</div>
+                            <div class="metric-value" id="user-frequency">-</div>
+                            <div class="metric-status status-warning">입력 필요</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-label">월 진단 횟수 (평균)</div>
+                            <div class="metric-value" style="color: #0ea5e9;">45</div>
+                            <div class="metric-status" style="color: #0ea5e9;">업계 표준</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-label">팀 DAU</div>
+                            <div class="metric-value" id="team-dau">-</div>
+                            <div class="metric-status status-warning">추적 중</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-label">목표 DAU</div>
+                            <div class="metric-value" style="color: #10b981;">80%</div>
+                            <div class="metric-status status-good">목표</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155;">월간 진단 횟수 입력</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="number" id="habit-frequency" placeholder="예: 25" min="0" max="500" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem;" />
+                            <button onclick="updateHabitTracker()" style="padding: 0.75rem 1.5rem; background: var(--habit-gradient); color: white; border: none; border-radius: 0.375rem; font-weight: 600; cursor: pointer;">
+                                저장
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="habit-progress" style="width: 0%;"></div>
+                    </div>
+                    <p id="habit-status" style="text-align: center; color: #64748b; font-size: 0.9rem; margin: 0;"></p>
+
+                    <div class="coaching-message message-habit">
+                        <p id="habit-message" style="margin: 0; font-size: 0.95rem;"></p>
+                    </div>
+                </div>
+
+                <!-- 성장 런웨이 -->
+                <div class="coaching-card runway">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🚀</span>
+                        <h3 class="card-title">12개월 성장 런웨이</h3>
+                    </div>
+                    <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">각 Phase별 목표와 실행 방법</p>
+
+                    <div id="growth-phases">
+                        <div class="phase-box">
+                            <div class="phase-title">📍 Phase 1 (0-3개월): 기초 다지기</div>
+                            <div class="phase-detail">
+                                ✓ 팀 DAU를 40% → 80%로 증가<br>
+                                ✓ 1개 부서 추가 온보딩<br>
+                                ✓ 월 MRR: $2,000 → $5,000 (2.5배)
+                            </div>
+                        </div>
+
+                        <div class="phase-box" style="border-left-color: #3b82f6; background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);">
+                            <div class="phase-title">📍 Phase 2 (3-6개월): 확장</div>
+                            <div class="phase-detail">
+                                ✓ 팀 2배 확장 (5명 → 10명)<br>
+                                ✓ 기존 고객 LTV 30% 증가<br>
+                                ✓ 월 MRR: $5,000 → $15,000 (3배)
+                            </div>
+                        </div>
+
+                        <div class="phase-box" style="border-left-color: #3b82f6; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);">
+                            <div class="phase-title">📍 Phase 3 (6-12개월): 스케일</div>
+                            <div class="phase-detail">
+                                ✓ 새 산업 진출 (의료 → 금융)<br>
+                                ✓ 파트너 채널 구축 (컨설팅사)<br>
+                                ✓ 월 MRR: $15,000 → $50,000+ (3배)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="coaching-message message-runway">
+                        <p style="margin: 0; font-size: 0.95rem;">
+                            <strong>핵심:</strong> 각 Phase마다 2주마다 검증합니다. 목표를 놓치면 즉시 전략을 수정합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 다음 단계 안내 -->
+                <div class="coaching-card" style="border-left-color: #8b5cf6; background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🎯</span>
+                        <h3 class="card-title">당신의 다음 단계</h3>
+                    </div>
+                    <p style="color: #475569; margin-bottom: 1rem;">코칭 프레임워크 완성하기</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <a href="scenarios.html" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: white; border: 2px solid #e2e8f0; border-radius: 0.5rem; text-decoration: none; color: #1e293b; transition: all 0.3s;">
+                            <span style="font-size: 2rem; margin-bottom: 0.5rem;">🏗️</span>
+                            <span style="font-weight: 600; text-align: center;">Step 4: 차별화 구축<br><span style="font-size: 0.85rem; font-weight: normal; color: #64748b;">당신만의 경쟁력</span></span>
+                        </a>
+                        <a href="report.html" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: white; border: 2px solid #e2e8f0; border-radius: 0.5rem; text-decoration: none; color: #1e293b; transition: all 0.3s;">
+                            <span style="font-size: 2rem; margin-bottom: 0.5rem;">💹</span>
+                            <span style="font-weight: 600; text-align: center;">Step 5: 성장 수학<br><span style="font-size: 0.85rem; font-weight: normal; color: #64748b;">확장 가능성</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 AX Growth Navigator. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="manual.html" target="_blank" class="footer-link">📖 사용 매뉴얼</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 네비게이션 바 토글
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarNav = document.getElementById('navbarNav');
+
+            if (navbarToggle && navbarNav) {
+                navbarToggle.addEventListener('click', () => {
+                    navbarNav.classList.toggle('open');
+                });
+
+                const navLinks = navbarNav.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navbarNav.classList.remove('open');
+                    });
+                });
+            }
+
+            // 초기 로드
+            loadCoachingData();
+            updateWeeklyNudge();
+        });
+
+        function loadCoachingData() {
+            const savedFrequency = localStorage.getItem('ax-habit-frequency');
+            if (savedFrequency) {
+                document.getElementById('habit-frequency').value = savedFrequency;
+                updateHabitTracker();
+            }
+        }
+
+        function updateHabitTracker() {
+            const frequency = parseFloat(document.getElementById('habit-frequency').value) || 0;
+            const target = 45; // 평균 업계 표준
+            const percentage = Math.min((frequency / target) * 100, 100);
+
+            document.getElementById('user-frequency').textContent = Math.round(frequency);
+            document.getElementById('habit-progress').style.width = percentage + '%';
+
+            let status = '';
+            let message = '';
+
+            if (frequency === 0) {
+                status = '📍 입력 필요';
+                message = '월간 진단 횟수를 입력하세요. 이것이 당신의 성장 기준선이 됩니다.';
+            } else if (frequency < target * 0.5) {
+                status = '⚠️ 향상 필요';
+                message = `현재 ${Math.round(frequency)}회로 목표(${target}회)의 ${Math.round(percentage)}%입니다.\n팀의 진단 빈도를 2배 늘려보세요.`;
+            } else if (frequency < target) {
+                status = '📈 거의 다 왔습니다';
+                message = `${Math.round(percentage)}% 달성했습니다. 조금만 더 노력하면 업계 표준에 도달합니다!`;
+            } else if (frequency < target * 1.5) {
+                status = '✅ 목표 달성';
+                message = `🎉 축하합니다! 업계 표준을 달성했습니다. 이제 차별화 단계(Step 4)로 진행하세요.`;
+            } else {
+                status = '🚀 상위 10%';
+                message = `🚀 뛰어납니다! 상위 10% 기업과 동등한 수준입니다. 성장 수학(Step 5)을 계산하세요.`;
+            }
+
+            document.getElementById('habit-status').textContent = status;
+            document.getElementById('habit-message').textContent = message;
+
+            localStorage.setItem('ax-habit-frequency', frequency);
+        }
+
+        function updateWeeklyNudge() {
+            const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000)) % 12;
+            const nudges = [
+                { title: '기초 습관 형성: 일일 진단', detail: '이번 주는 팀 전체가 매일 1회 진단을 하도록 권장합니다. DAU 추적을 시작하세요.' },
+                { title: '팀 확대: 새 부서 초대', detail: '1개 부서를 추가로 초대하세요. 기존 부서의 성공 사례를 공유하면 설득력이 높습니다.' },
+                { title: '패턴 분석: 주간 리뷰 시간', detail: '월요일 아침에 팀 전체 리뷰 시간을 정하세요. 개선 항목을 함께 논의합니다.' },
+                { title: '자동화: 리마인더 설정', detail: 'Slack이나 이메일로 일일 리마인더를 설정하세요. 습관은 반복에서 나옵니다.' },
+                { title: '검증: 진단 vs 실제 결과 비교', detail: '3주 전 진단 결과와 지금을 비교하세요. 실제 개선이 일어나고 있나요?' },
+                { title: '확장: 산업 벤치마크 공유', detail: '당신 팀이 같은 산업 다른 기업과 어떻게 비교되는지 보여주세요.' },
+                { title: '동기 부여: 첫 성과 축하', detail: '첫 월간 개선을 축하하세요. 작은 성과도 팀 사기를 높입니다.' },
+                { title: '최적화: 부서별 맞춤형 설정', detail: '마케팅, 영업, 고객지원 부서별로 다른 목표를 설정하세요.' },
+                { title: '학습: 우수 사례 분석', detail: '가장 열심히 하는 팀의 행동을 분석하세요. 왜 성공하는가?' },
+                { title: '가속화: Phase 2 준비', detail: 'Phase 2 계획을 세우세요. 팀 확장, 고객 확대, LTV 증가를 목표로.' },
+                { title: '성과 정산: 월간 리포트 작성', detail: '월간 성과를 숫자로 정리하세요. ROI를 계산하고 보고합니다.' },
+                { title: '재계획: 다음 분기 목표 수립', detail: '지난 3개월을 정리하고 다음 분기 목표를 새롭게 설정합니다.' }
+            ];
+
+            const nudge = nudges[week];
+            document.getElementById('weekly-nudge').textContent = nudge.title;
+            document.getElementById('nudge-detail').textContent = nudge.detail;
+        }
+    </script>
+</body>
+</html>
