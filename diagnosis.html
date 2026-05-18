@@ -608,6 +608,76 @@
 
         <div id="areas-container"></div>
 
+        <!-- 🆕 고통 측정 섹션 (Pain-Quantification Coaching) -->
+        <div id="pain-quantification-section" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(248, 113, 113, 0.05) 100%); border-left: 5px solid #ef4444; border-radius: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <span style="font-size: 2rem;">💔</span>
+                <h3 style="margin: 0; font-size: 1.3rem; color: #1e293b; font-weight: 600;">당신의 고통은 얼마나 크나요?</h3>
+            </div>
+
+            <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">AI 검색 최적화로 인한 실제 비용을 계산해봅시다</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- 입력 필드 1: 월간 시간 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        AI 검색 최적화에 월간 몇 시간 소요되나요?
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="pain-hours" placeholder="예: 40" min="0" max="1000" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                        <span style="display: flex; align-items: center; color: #64748b; font-weight: 500;">시간/월</span>
+                    </div>
+                </div>
+
+                <!-- 입력 필드 2: 시급 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        팀의 평균 시급은? (원화)
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="pain-hourly-rate" placeholder="예: 50000" min="0" max="200000" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                        <span style="display: flex; align-items: center; color: #64748b; font-weight: 500;">원/시</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <button onclick="calculatePain()" style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border: none; border-radius: 0.375rem; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s;">
+                📊 당신의 고통 계산하기
+            </button>
+
+            <!-- 결과 표시 영역 -->
+            <div id="pain-result" style="display: none; margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 0.5rem; border: 2px solid #fecaca;">
+                <div style="margin-bottom: 1rem;">
+                    <p style="margin: 0; color: #64748b; font-size: 0.9rem;">월간 고통 (기회비용)</p>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.5rem;">
+                        <span id="pain-amount" style="font-size: 2rem; font-weight: 700; color: #ef4444;">₩0</span>
+                        <span style="color: #64748b;">/월</span>
+                    </div>
+                </div>
+
+                <div style="padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                    <p style="margin: 0 0 1rem 0; color: #64748b; font-size: 0.85rem;">📊 벤치마크 비교</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="margin: 0; color: #1e293b; font-weight: 600;">당신</p>
+                            <p id="user-amount" style="margin: 0; font-size: 1.5rem; color: #ef4444; font-weight: 700;">₩0</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p style="margin: 0; color: #64748b; font-size: 0.85rem;">vs 평균</p>
+                        </div>
+                        <div>
+                            <p style="margin: 0; color: #1e293b; font-weight: 600;">평균 기업</p>
+                            <p style="margin: 0; font-size: 1.5rem; color: #0ea5e9; font-weight: 700;">₩1,800,000</p>
+                        </div>
+                    </div>
+                    <div id="pain-insight" style="margin-top: 1rem; padding: 1rem; background: #fef2f2; border-left: 3px solid #ef4444; border-radius: 0.25rem;">
+                        <p id="pain-message" style="margin: 0; color: #991b1b; font-weight: 500; font-size: 0.95rem;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="results-section">
             <div class="results-title">진단 결과</div>
 
@@ -1067,6 +1137,56 @@
                 document.getElementById(`tab-${button.dataset.tab}`).classList.add('active');
             });
         });
+
+        // 🆕 고통 측정 (Pain-Quantification Coaching) 함수
+        function calculatePain() {
+            const hours = parseFloat(document.getElementById('pain-hours').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('pain-hourly-rate').value) || 0;
+
+            if (hours === 0 || hourlyRate === 0) {
+                alert('시간과 시급을 입력해주세요');
+                return;
+            }
+
+            // 월간 고통 비용 계산
+            const monthlyPain = hours * hourlyRate;
+
+            // 벤치마크 평균 (한국 중견기업)
+            const benchmarkPain = 1800000;
+
+            // 비교 비율
+            const ratio = (monthlyPain / benchmarkPain * 100).toFixed(0);
+
+            // 결과 표시
+            const resultDiv = document.getElementById('pain-result');
+            const amountDiv = document.getElementById('pain-amount');
+            const userAmountDiv = document.getElementById('user-amount');
+            const messageDiv = document.getElementById('pain-message');
+
+            // 숫자 포매팅
+            const formattedAmount = monthlyPain.toLocaleString('ko-KR');
+
+            amountDiv.textContent = `₩${formattedAmount}`;
+            userAmountDiv.textContent = `₩${formattedAmount}`;
+
+            // 코칭 메시지 생성
+            let message = '';
+            if (monthlyPain < 500000) {
+                message = '💭 더 깊이 파고드세요. 숨겨진 비용은?\n• 직원 이직 비용\n• 기회비용 (못 한 캠페인)\n• 의사결정 지연';
+            } else if (monthlyPain < benchmarkPain) {
+                message = `📊 평균보다 ${(100 - ratio)}% 적습니다.\n이 기회비용을 기억하세요. 3개월 후 ROI 계산에 쓰입니다.`;
+            } else {
+                message = `🚨 평균보다 ${(ratio - 100)}% 더 많습니다!\n이제 개선할 시간입니다.`;
+            }
+
+            messageDiv.textContent = message;
+            resultDiv.style.display = 'block';
+
+            // 결과 저장
+            localStorage.setItem('ax-pain-hours', hours);
+            localStorage.setItem('ax-pain-rate', hourlyRate);
+            localStorage.setItem('ax-pain-amount', monthlyPain);
+        }
 
         initializeAreas();
     </script>

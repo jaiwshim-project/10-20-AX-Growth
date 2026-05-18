@@ -522,6 +522,97 @@
             </div>
         </div>
 
+        <!-- 🆕 가치 증명 섹션 (Value-Validation Coaching) -->
+        <div id="value-validation-section" style="margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(74, 222, 128, 0.05) 100%); border-left: 5px solid #22c55e; border-radius: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <span style="font-size: 2rem;">💰</span>
+                <h3 style="margin: 0; font-size: 1.3rem; color: #1e293b; font-weight: 600;">당신의 개선을 돈으로 계산해봅시다</h3>
+            </div>
+
+            <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">진단 점수를 입력하면 ROI를 자동으로 계산합니다</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                <!-- 현재 점수 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        현재 AX 점수
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="current-score" placeholder="예: 42" min="0" max="100" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                        <span style="display: flex; align-items: center; color: #64748b; font-weight: 500;">/100</span>
+                    </div>
+                </div>
+
+                <!-- 목표 점수 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        목표 점수
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="target-score" placeholder="예: 75" min="0" max="100" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                        <span style="display: flex; align-items: center; color: #64748b; font-weight: 500;">/100</span>
+                    </div>
+                </div>
+
+                <!-- 월 방문자수 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        월간 방문자수
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="monthly-visitors" placeholder="예: 100000" min="0" max="10000000" style="flex: 1; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                        <span style="display: flex; align-items: center; color: #64748b; font-weight: 500;">명</span>
+                    </div>
+                </div>
+
+                <!-- 평균 주문가 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        평균 주문가 (원화)
+                    </label>
+                    <input type="number" id="average-order-value" placeholder="예: 50000" min="0" max="10000000" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                </div>
+
+                <!-- 현재 전환율 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        현재 전환율 (%)
+                    </label>
+                    <input type="number" id="current-conversion" placeholder="예: 3" min="0" max="100" step="0.1" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                </div>
+
+                <!-- 당사 솔루션 비용 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #334155; font-size: 0.9rem;">
+                        월 솔루션 비용 (원화)
+                    </label>
+                    <input type="number" id="solution-cost" placeholder="예: 2000000" min="0" max="100000000" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 1rem;" />
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <button onclick="calculateROI()" style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; border-radius: 0.375rem; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s;">
+                🧮 ROI 계산하기
+            </button>
+
+            <!-- 결과 표시 영역 -->
+            <div id="roi-result" style="display: none; margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 0.5rem; border: 2px solid #bbf7d0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <p style="margin: 0; color: #64748b; font-size: 0.9rem;">월간 추가 매출</p>
+                        <p id="roi-revenue" style="margin: 0.5rem 0 0 0; font-size: 2.5rem; font-weight: 700; color: #22c55e;">₩0</p>
+                    </div>
+                    <div>
+                        <p style="margin: 0; color: #64748b; font-size: 0.9rem;">ROI 배수</p>
+                        <p id="roi-multiple" style="margin: 0.5rem 0 0 0; font-size: 2.5rem; font-weight: 700; color: #0284c7;">0:1</p>
+                    </div>
+                </div>
+                <div id="roi-insight" style="margin-top: 1.5rem; padding: 1rem; background: #f0fdf4; border-left: 3px solid #22c55e; border-radius: 0.25rem;">
+                    <p id="roi-message" style="margin: 0; color: #166534; font-weight: 500; font-size: 0.95rem;"></p>
+                </div>
+            </div>
+        </div>
+
         <div class="tabs-container">
             <button class="tab-button active" data-tab="0">회의록 요약</button>
             <button class="tab-button" data-tab="1">제안서 생성</button>
@@ -953,6 +1044,65 @@
                 });
                 calculateRanking();
             }
+        }
+
+        // 🆕 가치 증명 (Value-Validation Coaching) 함수
+        function calculateROI() {
+            const currentScore = parseFloat(document.getElementById('current-score').value) || 0;
+            const targetScore = parseFloat(document.getElementById('target-score').value) || 0;
+            const monthlyVisitors = parseFloat(document.getElementById('monthly-visitors').value) || 0;
+            const averageOrderValue = parseFloat(document.getElementById('average-order-value').value) || 0;
+            const currentConversion = parseFloat(document.getElementById('current-conversion').value) || 0;
+            const solutionCost = parseFloat(document.getElementById('solution-cost').value) || 0;
+
+            if (currentScore === 0 || targetScore === 0 || monthlyVisitors === 0) {
+                alert('필수 정보를 입력해주세요');
+                return;
+            }
+
+            // 점수 개선 비율 (선형 관계)
+            const scoreImprovement = ((targetScore - currentScore) / 100) * 0.3; // 점수 개선 = 트래픽 증가 30%
+            const trafficIncrease = monthlyVisitors * scoreImprovement;
+
+            // 추가 매출 계산
+            const estimatedConversion = currentConversion + (scoreImprovement * 5); // 전환율도 향상
+            const additionalRevenue = trafficIncrease * (estimatedConversion / 100) * averageOrderValue;
+
+            // ROI 배수 계산
+            const monthlyROI = (additionalRevenue - solutionCost) / solutionCost;
+            const roiMultiple = additionalRevenue / solutionCost;
+
+            // 결과 표시
+            const resultDiv = document.getElementById('roi-result');
+            const revenueDiv = document.getElementById('roi-revenue');
+            const multipleDiv = document.getElementById('roi-multiple');
+            const messageDiv = document.getElementById('roi-message');
+
+            // 숫자 포매팅
+            const formattedRevenue = Math.round(additionalRevenue).toLocaleString('ko-KR');
+            const formattedMultiple = roiMultiple.toFixed(1);
+
+            revenueDiv.textContent = `₩${formattedRevenue}`;
+            multipleDiv.textContent = `${formattedMultiple}:1`;
+
+            // 코칭 메시지
+            let message = '';
+            if (roiMultiple < 5) {
+                message = '⚠️ 더 높은 목표를 설정해보세요. 10:1 이상의 ROI가 투자 가치가 있습니다.';
+            } else if (roiMultiple < 10) {
+                message = `✅ 좋습니다. 이 숫자가 맞다면, 당신은 우리 솔루션에 투자해야 합니다.\n월 추가 매출 ₩${formattedRevenue} > 월 비용 ₩${Math.round(solutionCost).toLocaleString('ko-KR')}`;
+            } else {
+                message = `🚀 뛰어난 ROI입니다! ${formattedMultiple}배 수익 창출이 가능합니다.\n즉시 구현을 권장합니다.`;
+            }
+
+            messageDiv.textContent = message;
+            resultDiv.style.display = 'block';
+
+            // 결과 저장
+            localStorage.setItem('ax-roi-current-score', currentScore);
+            localStorage.setItem('ax-roi-target-score', targetScore);
+            localStorage.setItem('ax-roi-revenue', additionalRevenue);
+            localStorage.setItem('ax-roi-multiple', roiMultiple);
         }
 
         document.querySelectorAll('.tab-button').forEach(button => {
